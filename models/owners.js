@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        owners.hasMany(models.teams, { foreignKey: 'owner_id'});
+        owners.hasMany(models.leagues, { foreignKey: 'admin_id'});
       }
     }
   });

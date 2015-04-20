@@ -19,9 +19,9 @@ var League           = models.leagues;
 var Matchup          = models.matchups;
 var Week             = models.weeks;
 var Performance		 = models.performances; 
-var Defense          = models.defenses;
-var Offense          = models.offenses;
-var Goalie           = models.goalies;
+var Defense          = models.defensePerformances;
+var Offense          = models.offensePerformances;
+var Goalie           = models.goaliePerformances;
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));

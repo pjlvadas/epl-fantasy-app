@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        defensePerformances.belongsTo(models.players, { foreignKey: 'player_id'});
+        defensePerformances.belongsTo(models.weeks, { foreignKey: 'week_id'});
       }
     }
   });

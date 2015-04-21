@@ -35,17 +35,82 @@ app.use(session({
 }));
 
 // var restrictAccess = function (req, res, next) {
-//   var sessionID = parseInt(req.session.currentUser);
+//   var sessionID = parseInt(req.session.currentOwner);
 //   var reqID = parseInt(req.params.id);
 
 //   sessionID === reqID ? next() : res.status(401).send({err: 401, msg: 'YOU SHALL NOT PASS'})
 // }
 
 // var authenticate = function (req, res, next) {
-//   req.session.currentUser ? next() : res.status(400).send({err: 400, msg: 'LOGIN TROLL'});
+//   req.session.currentOwner ? next() : res.status(400).send({err: 400, msg: 'LOGIN TROLL'});
 // }
 
+//unrestricted for testing purposes only
+app.get('/owners', function (req, res) {
+	Owner
+	.findAll({include: Team})
+	.then(function(owners) {
+		res.send(owners);
+	});
+});
 
+app.post('/owners', function (req, res) {
+	var firstName = req.body.owner_first_name;
+	var lastName  = req.body.owner_last_name;
+	var username  = req.body.username;
+	var password  = req.body.password;
+
+	bcryp.hash(password, 10, function (err, has) {
+		Owner
+		.create({
+			owner_first_name: firstName,
+			owner_last_name: lastName,
+			username: username,
+			password_digest: hash
+		})
+		.then(function(owner) {
+			res.send(owner);
+		});
+	});
+});
+
+app.get('/owners/:id', authenticate, restrictAccess, function (req, res) {
+	Owner
+	.findOne({
+		where: {id: req.params.id},
+		include: Team
+	})
+	.then(function(owner) {
+		res.send(owner);
+	});
+});
+
+app.put('/owners/:id', authenticate, restrictAccess, function (req, res) {
+	Owner
+	.findOne({
+		where: {id: req.params.id},
+		include: Team
+	})
+	.then(function(owner) {
+		owner
+		.update(req.body)
+		.then(function(updatedOwner) {
+			res.send(updatedOwner);
+		});
+	});
+});
+
+app.delete('/owners/:id', authenticate, restrictAccess, function (req, res) {
+	Owner
+	.findOne(req.params.id)
+	.then(function(owner) {
+		owner
+		.destroy()
+		.then(function(deletedOwner) {
+			res.send(deletedOwner);
+		});
+	});
+});
 
 
 app.listen(3000, function() {

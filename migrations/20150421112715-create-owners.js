@@ -23,6 +23,9 @@ module.exports = {
       owner_bio: {
         type: DataTypes.TEXT
       },
+      admin: {
+        type: DataTypes.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

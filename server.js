@@ -38,11 +38,11 @@ var restrictAccess = function (req, res, next) {
   var sessionID = parseInt(req.session.currentOwner);
   var reqID = parseInt(req.params.id);
 
-  sessionID === reqID ? next() : res.status(401).send({err: 401, msg: 'YOU SHALL NOT PASS'})
+  sessionID === reqID ? next() : res.status(401).send({err: 401, msg: 'WRONG PASSWORD'})
 }
 
 var authenticate = function (req, res, next) {
-  req.session.currentOwner ? next() : res.status(400).send({err: 400, msg: 'LOGIN TROLL'});
+  req.session.currentOwner ? next() : res.status(400).send({err: 400, msg: 'WRONG OWNER'});
 }
 
 //unrestricted for testing purposes only
@@ -57,6 +57,7 @@ app.get('/owners', function (req, res) {
 app.post('/owners', function (req, res) {
 	var firstName = req.body.owner_first_name;
 	var lastName  = req.body.owner_last_name;
+	var ownerBio  = req.body.owner_bio;
 	var username  = req.body.username;
 	var password  = req.body.password;
 
@@ -150,7 +151,7 @@ app.delete('/sessions', function (req, res) {
 
 app.get('/current_owner', function (req, res) {
 	Owner
-	.findOne({ where: {id: req.session.currentOwner}, include: Account})
+	.findOne({ where: {id: req.session.currentOwner}, include: Team})
 	.then(function(owner) {
 		res.send(owner);
 	});

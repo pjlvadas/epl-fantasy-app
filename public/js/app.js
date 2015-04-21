@@ -8,8 +8,10 @@ $(function() {
 	loginTemplate = Handlebars.compile($('#template-owner-log-in').html());
 	signUpTemplate = Handlebars.compile($('#template-owner-sign-up').html());
 	overviewTemplate = Handlebars.compile($('#template-normal-overview').html());
+	adminTemplate = Handlebars.compile($('#template-admin-overview').html());
 
-	fetchAndRenderSession();
+	renderLogin();
+	// fetchAndRenderSession();
 
 	$('body').on('click', '#button-log-in', login);
 	$('body').on('click', '#button-log-out', logout);
@@ -19,10 +21,15 @@ $(function() {
 
 });
 
+var renderLogin = function() {
+			$('#container').html(loginTemplate());	
+};
 var fetchAndRenderSession = function() {
 	$.get('/current_owner').done(function(owner) {
 		if (owner) {
-			$('#container').html(overviewTemplate(owner));
+			if (owner.admin) {
+				$('#container').html(adminOverviewTemplate(owner));
+			} else $('#container').html(overviewTemplate(owner));
 		} else {
 			$('#container').html(loginTemplate());
 		}
@@ -44,17 +51,19 @@ var createOwner = function() {
 	var password  = $('#new-password').val();
 	var firstName = $('#new-first-name').val();
 	var lastName  = $('#new-last-name').val();
+	var ownerBio  = $('#owner-bio').val();	
 
-	$.post('/users', {
+	$.post('/owners', {
 		username: username,
 		password: password,
 		owner_first_name: firstName,
 		owner_last_name: lastName,
-	}).done(function(user) {
+		owner_bio: ownerBio,
+	}).done(function(owner) {
 		fetchAndRenderSession();
 	}).error(function (response, disaster) {
 		var err = response.responseJSON;
-		alert(err.err + ' : ' + err,msg);
+		alert(err.err + ' : ' + err.msg);
 	});
 };
 

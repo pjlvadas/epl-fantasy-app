@@ -6,6 +6,11 @@ module.exports = function(sequelize, DataTypes) {
     team_name: DataTypes.STRING,
     team_motto: DataTypes.STRING
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
         teams.belongsTo(models.owners, { foreignKey: 'owner_id' });

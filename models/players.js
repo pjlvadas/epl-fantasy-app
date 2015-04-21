@@ -7,6 +7,11 @@ module.exports = function(sequelize, DataTypes) {
     epl_team: DataTypes.STRING,
     home_country: DataTypes.STRING
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
         players.hasMany(models.offensePerformances, { foreignKey: 'player_id' });

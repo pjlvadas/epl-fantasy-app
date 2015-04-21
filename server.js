@@ -61,11 +61,12 @@ app.post('/owners', function (req, res) {
 	var username  = req.body.username;
 	var password  = req.body.password;
 
-	bcryp.hash(password, 10, function (err, has) {
+	bcrypt.hash(password, 10, function (err, hash) {
 		Owner
 		.create({
 			owner_first_name: firstName,
 			owner_last_name: lastName,
+			owner_bio: ownerBio,
 			username: username,
 			password_digest: hash
 		})

@@ -8,6 +8,11 @@ module.exports = function(sequelize, DataTypes) {
     owner_bio: DataTypes.TEXT,
     admin: DataTypes.BOOLEAN
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+        
     classMethods: {
       associate: function(models) {
         owners.hasMany(models.teams, { foreignKey: 'owner_id' });

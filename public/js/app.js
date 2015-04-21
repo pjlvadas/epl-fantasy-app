@@ -28,7 +28,7 @@ var fetchAndRenderSession = function() {
 	$.get('/current_owner').done(function(owner) {
 		if (owner) {
 			if (owner.admin) {
-				$('#container').html(adminOverviewTemplate(owner));
+				$('#container').html(adminTemplate(owner));
 			} else $('#container').html(overviewTemplate(owner));
 		} else {
 			$('#container').html(loginTemplate());

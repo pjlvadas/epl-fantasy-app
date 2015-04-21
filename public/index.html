@@ -12,12 +12,17 @@
 	<script src='js/app.js'></script>
 </head>
 <body>
-	<h1>EPL FANTASY FOOTBALL</h1>
 	<div id="container"></div>
 
+	<div id="home-page">
+		<div id="welcome">
+		<h1>EPL FANTASY FOOTBALL</h1>
+		</div>
+	</div>	
+
 	<template id="template-owner-log-in">
-		<input type="text" id="username-log-in" placeholder="Enter Username">
-		<input type="password" id="password-log-in" placeholder="Enter Password">
+		<input type="text" name="username" id="username-log-in" placeholder="Enter Username">
+		<input type="password" name="password" id="password-log-in" placeholder="Enter Password">
 		<button id="button-log-in">Log In</button>
 		<p>Register New Owner</p>
 		<button id="button-sign-up">Sign Up</button>
@@ -25,26 +30,42 @@
 
 	<template id="template-owner-sign-up">
 		<h2>Register Owner</h2>
-		<input type="text" id="new-first-name" placeholder="First Name">
-		<input type="text" id="new-last-name" placeholder="Last Name">
-		<input type="text" id="owner-bio" placeholder="About You">
-		<input type="text" id="new-username" placeholder="Username">
-		<input type="password" id="new-password" placeholder="Create Password">
+		<input type="text" name="first-name" id="new-first-name" placeholder="First Name">
+		<input type="text" name="last-name" id="new-last-name" placeholder="Last Name">
+		<input type="text" name="owner-bio" id="owner-bio" placeholder="About You">
+		<input type="text" name="username" id="new-username" placeholder="Username">
+		<input type="password" name="password" id="new-password" placeholder="Create Password">
 		<button id="create-owner">Submit</button>
 		<button id="go-back">Go Back</button>
 	</template>
 
+	<template id="template-owner-edit">
+		<h2>Edit Owner</h2>
+		<input type="text" name="first-name" id="new-first-name" value="{{owner_first_name}}">
+		<input type="text" name="last-name" id="new-last-name" value="{{owner_last_name}}">
+		<input type="text" name="owner-bio" id="owner-bio" value="{{owner_bio}}">
+		<input type="text" name="username" id="new-username" value="{{username}}">
+		<input type="password" name="password" id="new-password" value="{{password}}">
+		<button id="complete-edit">Complete</button>
+		<button id="go-back">Go Back</button>
+	</template>	
+
 	<template id="template-normal-overview">
 		<div id="overview-page" value="{{id}}">
     	<button id="button-new-league">Create New League</button>
-    	<button id="button-log-out">LOG OUT</button>
+    	<button id="button-edit-account">Edit Account</button>
     	<button id="button-delete-account">Delete Account</button>		
+    	<button id="button-log-out">Log Out</button>
 	</template>
 
 	<template id="template-admin-overview">
 		<div id="admin-overview-page" value="{{id}}">
 		<button id="update-stats">Update Performances</button>
-    	<button id="button-log-out">LOG OUT</button>			
+
+    	<button id="button-new-league">Create New League</button>
+    	<button id="button-edit-account">Edit Account</button>
+    	<button id="button-delete-account">Delete Account</button>	
+    	<button id="button-log-out">Log Out</button>			
 	</template>
 
 </body>

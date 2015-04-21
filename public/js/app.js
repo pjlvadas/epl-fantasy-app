@@ -12,10 +12,10 @@ var App = {
 
 $(function() {
 	console.log('WHAT A HIT');
-	App.ownersCollection = new App.Collection.Owners();
+	App.ownersCollection = new App.Collections.Owners();
 	App.ownersCollection.fetch();
+	
 	App.router = new App.router();
-
 	Backbone.history.start();
 
 

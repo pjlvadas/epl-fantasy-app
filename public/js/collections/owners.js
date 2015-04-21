@@ -6,5 +6,5 @@ App.Collections.Owners = Backbone.Collection.extend({
 
 	url: '/owners',
 
-	models: App.Models.Owner
-})
+	model: App.Models.Owner
+});

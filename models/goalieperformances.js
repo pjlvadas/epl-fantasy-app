@@ -12,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        goaliePerformances.belongsTo(models.players, { foreignKey: 'player_id'});
+        goaliePerformances.belongsTo(models.weeks, { foreignKey: 'week_id'});
       }
     }
   });

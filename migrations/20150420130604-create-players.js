@@ -17,6 +17,12 @@ module.exports = {
       position: {
         type: DataTypes.STRING
       },
+      epl_team: {
+        type: DataTypes.STRING
+      },
+      home_country: {
+        type: DataTypes.STRING
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

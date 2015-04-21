@@ -8,7 +8,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        matchups.belongsTo(models.weeks, { foreignKey: 'week_id'});
+        matchups.belongsToMany(models.teams, {
+          through: 'matchups_teams',
+          foreignKey: 'team_id'
+        });
+
       }
     }
   });

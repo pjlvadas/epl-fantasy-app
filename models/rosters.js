@@ -5,9 +5,16 @@ module.exports = function(sequelize, DataTypes) {
     team_id: DataTypes.INTEGER,
     player_id: DataTypes.INTEGER
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        rosters.belongsTo(models.teams, { foreignKey: 'team_id' });
+        rosters.belongsTo(models.players, { foreignKey: 'player_id' });
+        rosters.belongsTo(models.weeks, { foreignKey: 'week_id' });        
       }
     }
   });

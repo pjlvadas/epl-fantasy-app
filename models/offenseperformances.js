@@ -8,9 +8,15 @@ module.exports = function(sequelize, DataTypes) {
     minutes_played: DataTypes.INTEGER,
     started: DataTypes.BOOLEAN
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        offensePerformances.belongsTo(models.players, { foreignKey: 'player_id'});
+        offensePerformances.belongsTo(models.weeks, { foreignKey: 'week_id'});
       }
     }
   });

@@ -3,11 +3,23 @@ module.exports = function(sequelize, DataTypes) {
   var players = sequelize.define("players", {
     player_first_name: DataTypes.STRING,
     player_last_name: DataTypes.STRING,
-    position: DataTypes.STRING
+    position: DataTypes.STRING,
+    epl_team: DataTypes.STRING,
+    home_country: DataTypes.STRING
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        players.hasMany(models.offensePerformances, { foreignKey: 'player_id' });
+        players.hasMany(models.defensePerformances, { foreignKey: 'player_id' });
+        players.hasMany(models.goaliePerformances, { foreignKey: 'player_id' });
+        players.hasMany(models.performances, { foreignKey: 'player_id' });        
+
+        players.belongsTo(models.rosters, { foreignKey: 'player_id' });                        
       }
     }
   });

@@ -26,11 +26,11 @@ module.exports = {
       penalties_conceded: {
         type: DataTypes.INTEGER
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE
       }

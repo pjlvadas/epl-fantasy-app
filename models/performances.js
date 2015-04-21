@@ -4,9 +4,15 @@ module.exports = function(sequelize, DataTypes) {
     player_id: DataTypes.INTEGER,
     week_id: DataTypes.INTEGER
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        performances.belongsTo(models.players, { foreignKey: 'player_id' });
+        performances.belongsTo(models.weeks, { foreignKey: 'week_id' });        
       }
     }
   });

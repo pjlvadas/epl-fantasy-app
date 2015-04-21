@@ -32,11 +32,11 @@ module.exports = {
       assists_for: {
         type: DataTypes.INTEGER
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE
       }

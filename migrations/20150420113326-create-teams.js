@@ -20,11 +20,11 @@ module.exports = {
       team_motto: {
         type: DataTypes.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE
       }

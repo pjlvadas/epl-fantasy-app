@@ -1,39 +1,39 @@
 "use strict";
 module.exports = {
   up: function(migration, DataTypes, done) {
-    migration.createTable("owners", {
+    migration.createTable("players", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      owner_first_name: {
+      player_first_name: {
         type: DataTypes.STRING
       },
-      owner_last_name: {
+      player_last_name: {
         type: DataTypes.STRING
       },
-      username: {
-        type: DataTypes.STRING(20)
+      position: {
+        type: DataTypes.STRING
       },
-      password: {
-        type: DataTypes.STRING(20)
+      epl_team: {
+        type: DataTypes.STRING
       },
-      owner_bio: {
-        type: DataTypes.TEXT
+      home_country: {
+        type: DataTypes.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE
       }
     }).done(done);
   },
   down: function(migration, DataTypes, done) {
-    migration.dropTable("owners").done(done);
+    migration.dropTable("players").done(done);
   }
 };

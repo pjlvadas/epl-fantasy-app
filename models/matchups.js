@@ -6,9 +6,19 @@ module.exports = function(sequelize, DataTypes) {
     team_two_ID: DataTypes.INTEGER,
     season_ID: DataTypes.INTEGER
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        matchups.belongsTo(models.weeks, { foreignKey: 'week_id'});
+        matchups.belongsToMany(models.teams, {
+          through: 'matchups_teams',
+          foreignKey: 'team_id'
+        });
+
       }
     }
   });

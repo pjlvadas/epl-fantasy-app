@@ -10,9 +10,15 @@ module.exports = function(sequelize, DataTypes) {
     goals_for: DataTypes.INTEGER,
     assists_for: DataTypes.INTEGER
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        goaliePerformances.belongsTo(models.players, { foreignKey: 'player_id'});
+        goaliePerformances.belongsTo(models.weeks, { foreignKey: 'week_id'});
       }
     }
   });

@@ -34,16 +34,16 @@ app.use(session({
 	resave: false
 }));
 
-// var restrictAccess = function (req, res, next) {
-//   var sessionID = parseInt(req.session.currentOwner);
-//   var reqID = parseInt(req.params.id);
+var restrictAccess = function (req, res, next) {
+  var sessionID = parseInt(req.session.currentOwner);
+  var reqID = parseInt(req.params.id);
 
-//   sessionID === reqID ? next() : res.status(401).send({err: 401, msg: 'YOU SHALL NOT PASS'})
-// }
+  sessionID === reqID ? next() : res.status(401).send({err: 401, msg: 'YOU SHALL NOT PASS'})
+}
 
-// var authenticate = function (req, res, next) {
-//   req.session.currentOwner ? next() : res.status(400).send({err: 400, msg: 'LOGIN TROLL'});
-// }
+var authenticate = function (req, res, next) {
+  req.session.currentOwner ? next() : res.status(400).send({err: 400, msg: 'LOGIN TROLL'});
+}
 
 //unrestricted for testing purposes only
 app.get('/owners', function (req, res) {
@@ -112,6 +112,52 @@ app.delete('/owners/:id', authenticate, restrictAccess, function (req, res) {
 	});
 });
 
+app.post('/sessions', function (req, res) {
+	var loginUsername = req.body.username;
+	var loginPassword = req.body.password;
+
+	Owner
+	.findOne({
+		where: { username: loginUsername }
+	})
+	.then(function(owner) {
+		if (owner) {
+			bcrypt.compare(loginPassword, owner.password_digest, function (err, result) {
+				if (result) {
+					req.session.currentOwner = owner.id;
+					res.send('Correct-A-Mundo!');
+				} else {
+					res.status(400);
+					res.send({
+						err: 400, msg: 'Wrong Password Budday'
+					});
+				}
+			});
+		} else {
+			res.status(400);
+			res.send({
+				err: 400,
+				msg: "WE DON'T KNOW YOUR MONEY"
+			});
+		}
+	});
+});
+
+app.delete('/sessions', function (req, res) {
+	delete req.session.currentOwner;
+	res.send('LOG OUT SUCCESSFUL');
+});
+
+app.get('/current_owner', function (req, res) {
+	Owner
+	.findOne({ where: {id: req.session.currentOwner}, include: Account})
+	.then(function(owner) {
+		res.send(owner);
+	});
+});
+
+
+app.use(express.static('./public'));
 
 app.listen(3000, function() {
 	console.log('Server listening on 30000000000000');

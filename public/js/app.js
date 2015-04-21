@@ -3,7 +3,7 @@ var signupTemplate
 var overviewTemplate
 
 $(function() {
-	console.log('Cha-Ching Noise!');
+	console.log('WHAT A HIT');
 
 	loginTemplate = Handlebars.compile($('#template-log-in').html());
 	signUpTemplate = Handlebars.compile($('#template-sign-up').html());

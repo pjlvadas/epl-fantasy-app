@@ -29,21 +29,21 @@
 		<input type="text" id="new-last-name" placeholder="Last Name">
 		<input type="text" id="owner-bio" placeholder="About You">
 		<input type="text" id="new-username" placeholder="Username">
-		<input type="text" id="new-password" placeholder="Create Password">
-<!-- 		<input type="password" id="admin-password" placeholder="Admin Password"> -->
+		<input type="password" id="new-password" placeholder="Create Password">
 		<button id="create-owner">Submit</button>
 		<button id="go-back">Go Back</button>
 	</template>
 
 	<template id="template-normal-overview">
 		<div id="overview-page" value="{{id}}">
+    	<button id="button-new-league">Create New League</button>
     	<button id="button-log-out">LOG OUT</button>
     	<button id="button-delete-account">Delete Account</button>		
 	</template>
 
 	<template id="template-admin-overview">
 		<div id="admin-overview-page" value="{{id}}">
-		<button id="update-stats">Update Stats</button>
+		<button id="update-stats">Update Performances</button>
     	<button id="button-log-out">LOG OUT</button>			
 	</template>
 

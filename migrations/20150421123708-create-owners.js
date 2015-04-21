@@ -9,21 +9,25 @@ module.exports = {
         type: DataTypes.INTEGER
       },
       owner_first_name: {
+        allowNull: false,
         type: DataTypes.STRING
       },
       owner_last_name: {
         type: DataTypes.STRING
       },
       username: {
+        allowNull: false,
         type: DataTypes.STRING(20)
       },
-      password: {
-        type: DataTypes.STRING(20)
+      password_digest: {
+        allowNull: false,
+        type: DataTypes.STRING
       },
       owner_bio: {
         type: DataTypes.TEXT
       },
       admin: {
+        allowNull: false,
         type: DataTypes.BOOLEAN
       },
       created_at: {

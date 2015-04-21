@@ -60,6 +60,7 @@ app.post('/owners', function (req, res) {
 	var ownerBio  = req.body.owner_bio;
 	var username  = req.body.username;
 	var password  = req.body.password;
+	var admin 	  = req.body.admin;
 
 	bcrypt.hash(password, 10, function (err, hash) {
 		Owner
@@ -68,6 +69,7 @@ app.post('/owners', function (req, res) {
 			owner_last_name: lastName,
 			owner_bio: ownerBio,
 			username: username,
+			admin: false,
 			password_digest: hash
 		})
 		.then(function(owner) {
@@ -75,6 +77,7 @@ app.post('/owners', function (req, res) {
 		});
 	});
 });
+
 
 app.get('/owners/:id', authenticate, restrictAccess, function (req, res) {
 	Owner
@@ -87,10 +90,11 @@ app.get('/owners/:id', authenticate, restrictAccess, function (req, res) {
 	});
 });
 
-app.put('/owners/:id', authenticate, restrictAccess, function (req, res) {
+//unrestricted for testing purposes only
+app.put('/owners/:id', function (req, res) {
 	Owner
 	.findOne({
-		where: {id: req.params.id},
+		where: { id: req.params.id },
 		include: Team
 	})
 	.then(function(owner) {
@@ -102,7 +106,8 @@ app.put('/owners/:id', authenticate, restrictAccess, function (req, res) {
 	});
 });
 
-app.delete('/owners/:id', authenticate, restrictAccess, function (req, res) {
+//unrestricted for testing purposes only
+app.delete('/owners/:id', function (req, res) {
 	Owner
 	.findOne(req.params.id)
 	.then(function(owner) {
@@ -110,6 +115,72 @@ app.delete('/owners/:id', authenticate, restrictAccess, function (req, res) {
 		.destroy()
 		.then(function(deletedOwner) {
 			res.send(deletedOwner);
+		});
+	});
+});
+
+
+//unrestricted for testing purposes only
+app.get('/leagues', function (req, res) {
+	Owner
+	.findAll({include: Team})
+	.then(function(owners) {
+		res.send(owners);
+	});
+});
+
+app.post('/leagues', function (req, res) {
+	var leagueName = req.body.league_name;
+	var adminID  = req.body.adminID;
+
+	bcrypt.hash(password, 10, function (err, hash) {
+		League
+		.create({
+			league_name: leagueName,
+		})
+		.then(function(league) {
+			res.send(league);
+		});
+	});
+});
+
+//unrestricted for testing purposes only
+app.get('/leagues/:id', function (req, res) {
+	League
+	.findOne({
+		where: {id: req.params.id},
+		include: [Team]
+	})
+	.then(function(league) {
+		res.send(league);
+	});
+});
+
+//unrestricted for testing purposes only
+app.put('/leagues/:id', function (req, res) {
+	Owner
+	.findOne({
+		where: { id: req.params.id },
+		include: [Team]
+	})
+	.then(function(league) {
+		league
+		.update(req.body)
+		.then(function(updatedLeague) {
+			res.send(updatedLeague);
+		});
+	});
+});
+
+//unrestricted for testing purposes only
+app.delete('/leagues/:id', function (req, res) {
+	Owner
+	.findOne(req.params.id)
+	.then(function(league) {
+		league
+		.destroy()
+		.then(function(deletedLeague) {
+			res.send(deletedLeague);
 		});
 	});
 });
@@ -139,7 +210,7 @@ app.post('/sessions', function (req, res) {
 			res.status(400);
 			res.send({
 				err: 400,
-				msg: "WE DON'T KNOW YOUR MONEY"
+				msg: "I DON'T KNOW YOU"
 			});
 		}
 	});

@@ -1,6 +1,7 @@
 var loginTemplate
 var signupTemplate
 var overviewTemplate
+var adminTemplate
 
 $(function() {
 	console.log('WHAT A HIT');
@@ -10,8 +11,7 @@ $(function() {
 	overviewTemplate = Handlebars.compile($('#template-normal-overview').html());
 	adminTemplate = Handlebars.compile($('#template-admin-overview').html());
 
-	renderLogin();
-	// fetchAndRenderSession();
+	fetchAndRenderSession();
 
 	$('body').on('click', '#button-log-in', login);
 	$('body').on('click', '#button-log-out', logout);
@@ -21,9 +21,6 @@ $(function() {
 
 });
 
-var renderLogin = function() {
-			$('#container').html(loginTemplate());	
-};
 var fetchAndRenderSession = function() {
 	$.get('/current_owner').done(function(owner) {
 		if (owner) {

@@ -34,12 +34,9 @@ App.Views.NewOwner = Backbone.View.extend({
 				data: data
 			})
 			.done(function(newOwner) {
-		var ownerId = newOwner.id;
-				debugger;
+				var ownerId = newOwner.id;
 				sessionStorage.setItem('currentOwner', ownerId);
-				debugger;
-		App.router.navigate('owners/' + ownerId, {trigger:true});								
-				// App.router.navigate('owners/' + newOwner.id, {trigger:true});
+				App.router.navigate('owners/' + ownerId, {trigger:true});
 			});
 		}
 	},

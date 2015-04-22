@@ -5,6 +5,11 @@ module.exports = function(sequelize, DataTypes) {
     week_start: DataTypes.DATE,
     week_end: DataTypes.DATE
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
         weeks.hasMany(models.matchups, { foreignKey: 'week_id' });

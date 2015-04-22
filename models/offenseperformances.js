@@ -8,6 +8,11 @@ module.exports = function(sequelize, DataTypes) {
     minutes_played: DataTypes.INTEGER,
     started: DataTypes.BOOLEAN
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
         offensePerformances.belongsTo(models.players, { foreignKey: 'player_id'});

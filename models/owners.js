@@ -4,14 +4,19 @@ module.exports = function(sequelize, DataTypes) {
     owner_first_name: DataTypes.STRING,
     owner_last_name: DataTypes.STRING,
     username: DataTypes.STRING(20),
-    password: DataTypes.STRING(20),
-    owner_bio: DataTypes.TEXT
+    password_digest: DataTypes.STRING,
+    owner_bio: DataTypes.TEXT,
+    admin: DataTypes.BOOLEAN
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
-        owners.hasMany(models.teams, { foreignKey: 'owner_id'});
-        owners.hasMany(models.leagues, { foreignKey: 'admin_id'});
-      }
+        owners.hasMany(models.teams, { foreignKey: 'owner_id' });
+        owners.hasMany(models.leagues, { foreignKey: 'owner_id' });      }
     }
   });
   return owners;

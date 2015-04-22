@@ -10,6 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     goals_for: DataTypes.INTEGER,
     assists_for: DataTypes.INTEGER
   }, {
+
+    underscored: true,
+
+    // timestamps: false,
+     
     classMethods: {
       associate: function(models) {
         goaliePerformances.belongsTo(models.players, { foreignKey: 'player_id'});

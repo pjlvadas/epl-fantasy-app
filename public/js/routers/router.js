@@ -8,7 +8,7 @@ App.router = Backbone.Router.extend({
 		'home': 'homepage',
 		'login': 'login',
 		'owners/:id': 'owner',
-		'create_owner': 'createOwner',
+		'register': 'registerOwner',
 		'edit_owner/:id': 'editOwner',
 		'create_league': 'createLeague'
 	},
@@ -24,7 +24,7 @@ App.router = Backbone.Router.extend({
 			$('#container').hide();
 			$('#home-page').show();
 		}
-	}
+	},
 
 	login: function() {
 		console.log('Login Route');
@@ -37,18 +37,26 @@ App.router = Backbone.Router.extend({
 	owner: function(id) {
 		console.log('Owner Route')
 		$('#container').empty();
-		$('#container').show();
+		$('#container').show();		
+		$('#home-page').hide();
 		App.ownersCollection
 			.fetch()
 			.done(function() {
 				var owner = App.ownersCollection.get(id);
-				new App.Views.Owner({model: owner});
+				var type = owner.attributes.admin;
+				if (type === true) {
+					new App.Views.Admin({model: owner});
+				} else {
+					new App.Views.Owner({model: owner});
+				  };
+
 			});	
 	},
 
-	createOwner: function() {
+	registerOwner: function() {
 		console.log('Create Owner Route');
 		$('#container').empty();
+		$('#container').show();
 		$('#home-page').hide();
 		new App.Views.NewOwner();
 	},
@@ -56,9 +64,10 @@ App.router = Backbone.Router.extend({
 	editOwner: function(id) {
 		console.log('Edit Owner Route');
 		$('#container').empty();
+		$('#container').show();		
 		$('#home-page').hide();
 		App.ownersCollection
-			.fetch
+			.fetch()
 			.done(function() {
 				var ownerModel = App.ownersCollection.get(id);
 				new App.Views.EditOwner({model: ownerModel});
@@ -67,6 +76,6 @@ App.router = Backbone.Router.extend({
 
 	createLeague: function() {
 
-	},
+	}
 
 });

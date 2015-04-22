@@ -232,8 +232,8 @@ app.get('/current_owner', function (req, res) {
 
 app.use(express.static('./public'));
 
-app.listen(3000, function() {
-	console.log('Server listening on 30000000000000');
-});
+// app.listen(3000, function() {
+// 	console.log('Server listening on 30000000000000');
+// });
 
 module.exports = app;

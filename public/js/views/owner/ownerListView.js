@@ -1,4 +1,4 @@
-App.Views.UsersListView = Backbone.View.extend({
+App.Views.OwnersListView = Backbone.View.extend({
 
 	initialize: function() {
 		console.log('new OWNER LIST VIEW created');

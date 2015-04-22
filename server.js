@@ -45,6 +45,7 @@ var authenticate = function (req, res, next) {
   req.session.currentOwner ? next() : res.status(400).send({err: 400, msg: 'WRONG OWNER'});
 }
 
+////////////////OWNER////////////////////
 //unrestricted for testing purposes only
 app.get('/owners', function (req, res) {
 	Owner
@@ -119,28 +120,28 @@ app.delete('/owners/:id', function (req, res) {
 	});
 });
 
+////////////////LEAGUES////////////////////
 
 //unrestricted for testing purposes only
 app.get('/leagues', function (req, res) {
-	Owner
-	.findAll({include: Team})
-	.then(function(owners) {
-		res.send(owners);
+	League
+	.findAll({include: Owner})
+	.then(function(leagues) {
+		res.send(leagues);
 	});
 });
 
 app.post('/leagues', function (req, res) {
 	var leagueName = req.body.league_name;
-	var adminID  = req.body.adminID;
+	var adminId    = req.body.admin_id;
 
-	bcrypt.hash(password, 10, function (err, hash) {
-		League
-		.create({
-			league_name: leagueName,
-		})
-		.then(function(league) {
-			res.send(league);
-		});
+	League
+	.create({
+		league_name: leagueName,
+		admin_id: adminId
+	})
+	.then(function(league) {
+		res.send(league);
 	});
 });
 
@@ -149,7 +150,7 @@ app.get('/leagues/:id', function (req, res) {
 	League
 	.findOne({
 		where: {id: req.params.id},
-		include: [Team]
+		include: [Owner]
 	})
 	.then(function(league) {
 		res.send(league);
@@ -158,10 +159,10 @@ app.get('/leagues/:id', function (req, res) {
 
 //unrestricted for testing purposes only
 app.put('/leagues/:id', function (req, res) {
-	Owner
+	League
 	.findOne({
 		where: { id: req.params.id },
-		include: [Team]
+		include: [Owner]
 	})
 	.then(function(league) {
 		league
@@ -174,7 +175,7 @@ app.put('/leagues/:id', function (req, res) {
 
 //unrestricted for testing purposes only
 app.delete('/leagues/:id', function (req, res) {
-	Owner
+	League
 	.findOne(req.params.id)
 	.then(function(league) {
 		league
@@ -185,6 +186,153 @@ app.delete('/leagues/:id', function (req, res) {
 	});
 });
 
+////////////////TEAMS////////////////////
+//unrestricted for testing purposes only
+app.get('/teams', function (req, res) {
+	Team
+	.findAll({include: Owner})
+	.then(function(teams) {
+		res.send(teams);
+	});
+});
+
+app.post('/teams', function (req, res) {
+	var leagueId  = req.body.league_id;
+	var ownerId   = req.body.owner_id;
+	var teamName  = req.body.team_name;
+	var teamMotto = req.body.team_motto;
+
+	Team
+	.create({
+		team_name: teamName,
+		team_motto: teamMotto,
+		league_id: leagueId,
+		owner_id: ownerId
+	})
+	.then(function(team) {
+		res.send(team);
+	});
+});
+
+//unrestricted for testing purposes only
+app.get('/teams/:id', function (req, res) {
+	Team
+	.findOne({
+		where: {id: req.params.id},
+		include: Owner
+	})
+	.then(function(team) {
+		res.send(team);
+	});
+});
+
+//unrestricted for testing purposes only
+app.put('/teams/:id', function (req, res) {
+	Team
+	.findOne({
+		where: { id: req.params.id },
+		include: Owner
+	})
+	.then(function(team) {
+		team
+		.update(req.body)
+		.then(function(updatedTeam) {
+			res.send(updatedTeam);
+		});
+	});
+});
+
+//unrestricted for testing purposes only
+app.delete('/teams/:id', function (req, res) {
+	Team
+	.findOne(req.params.id)
+	.then(function(league) {
+		team
+		.destroy()
+		.then(function(deletedTeam) {
+			res.send(deletedTeam);
+		});
+	});
+});
+
+////////////////ROSTER////////////////////
+//unrestricted for testing purposes only
+app.get('/rosters', function (req, res){
+  Roster
+    .findAll( {include: [
+        {model: Owner, include: [
+          {model: Team}]
+          }]
+        })
+    .then(function(rosters){
+      res.send(rosters);
+    });
+});
+
+app.post('/rosters', function (req, res) {
+	var weekId  = req.body.week_id;
+	var teamId = req.body.team_id;
+	var playerId = req.body.player_id;
+
+	Roster
+	.create({
+		week_id: weekId,
+		team_id: teamId,
+		player_id: playerId
+	})
+	.then(function(roster) {
+		res.send(roster);
+	});
+});
+
+//unrestricted for testing purposes only
+app.get('/rosters/:id', function (req, res) {
+    Roster
+    .findOne({where:
+  	  {id: req.params.id},
+  		  include: [
+  		  {mode: Owner, include: [
+  			  {model: Team}]
+  		  }]
+  	})
+    .then(function(roster){
+      res.send(roster);
+    });
+});
+
+//unrestricted for testing purposes only
+app.put('/rosters/:id', function (req, res) {
+	Team
+  	.findOne({where:
+  	  {id: req.params.id},
+  		  include: [
+  		  {mode: Owner, include: [
+  			  {model: Team}]
+  		  }]
+  	})
+	.then(function(roster) {
+		roster
+		.update(req.body)
+		.then(function(updatedRoster) {
+			res.send(updatedRoster);
+		});
+	});
+});
+
+//unrestricted for testing purposes only
+app.delete('/rosters/:id', function (req, res) {
+	Roster
+	.findOne(req.params.id)
+	.then(function(roster) {
+		roster
+		.destroy()
+		.then(function(deletedRoster) {
+			res.send(deletedRoster);
+		});
+	});
+});
+
+///////// SESSIONS //////////
 app.post('/sessions', function (req, res) {
 	var loginUsername = req.body.username;
 	var loginPassword = req.body.password;

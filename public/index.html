@@ -91,5 +91,34 @@
     	<button id="button-log-out">Log Out</button>			
 	</template>
 
+	<template id="template-team-view">
+		<div class="team-view" value="{{id}}">
+		<h2>{{team_name}}</h2>
+		<h3>{{team_motto}}</h3>
+		<ul class="team-players">
+			<li class="team-player-names">{{player_first_name}} {{player_last_name}}</li>
+			<li class="team-player-position">{{position}}</li>
+			<li class="team-player-epl">{{epl_team}}</li>
+			<li class="team-player-country">{{home_counrty}}</li>
+		</ul>
+		</div>
+	</template>
+
+	<template id="template-league-view">
+		<div class="league-view" value="{{id}}">
+			<h2>{{league_name}}</h2>
+			<h3>Current Standings</h3>
+			<ul class="league-standings">
+				<li class="league-team">{{team_name}}</li>
+				<li class="league-team-points"></li>
+			</ul>
+		</div>
+		<div class="league-matchups">
+		</div>
+	</template>
+
+
+
+
 </body>
 </html>

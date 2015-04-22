@@ -332,6 +332,142 @@ app.delete('/rosters/:id', function (req, res) {
 	});
 });
 
+////////////////MATCHUPS////////////////////
+//unrestricted for testing purposes only
+app.get('/matchups', function (req, res){
+	Matchup
+	.findAll({include: [Roster]})
+	.then(function(matchups) {
+		res.send(matchups);
+	});
+});
+
+app.post('/matchups', function (req, res) {
+	var weekId  = req.body.week_ID;
+	var teamOneId = req.body.team_one_ID;
+	var teamTwoId = req.body.team_two_ID;	
+	var seasonId = req.body.season_ID;
+
+	Matchup
+	.create({
+		week_id: weekId,
+		team_one_id: teamOneId,
+		team_two_id: teamTwoId,		
+		season_id: seasonId
+	})
+	.then(function(matchup) {
+		res.send(matchup);
+	});
+});
+
+//unrestricted for testing purposes only
+app.get('/matchups/:id', function (req, res) {
+	Matchup
+	.findOne({
+		where: {id: req.params.id},
+		include: [Roster]
+	})
+	.then(function(matchup) {
+		res.send(matchup);
+	});
+});
+
+//unrestricted for testing purposes only
+app.put('/matchups/:id', function (req, res) {
+	Matchup
+	.findOne({
+		where: { id: req.params.id },
+		include: [Roster]
+	})
+	.then(function(matchup) {
+		matchup
+		.update(req.body)
+		.then(function(updatedMatchup) {
+			res.send(updatedMatchup);
+		});
+	});
+});
+
+//unrestricted for testing purposes only
+app.delete('/matchups/:id', function (req, res) {
+	Matchip
+	.findOne(req.params.id)
+	.then(function(matchup) {
+		matchup
+		.destroy()
+		.then(function(deletedMatchup) {
+			res.send(deletedMatchup);
+		});
+	});
+});
+
+////////////////WEEKS////////////////////
+//unrestricted for testing purposes only
+app.get('/weeks', function (req, res) {
+	Week
+	.findAll({include: [Matchup]})
+	.then(function(weeks) {
+		res.send(weeks);
+	});
+});
+
+app.post('/weeks', function (req, res) {
+	var season = req.body.season;
+	var weekStart  = req.body.week_start;
+	var weekEnd  = req.body.week_end;
+
+	Week
+	.create({
+		season: season,
+		week_start: weekStart,
+		week_end: weekEnd
+	})
+	.then(function(week) {
+		res.send(week);
+	});
+});
+
+
+app.get('/weeks/:id', authenticate, restrictAccess, function (req, res) {
+	Week
+	.findOne({
+		where: {id: req.params.id},
+		include: [Matchup]
+	})
+	.then(function(week) {
+		res.send(week);
+	});
+});
+
+//unrestricted for testing purposes only
+app.put('/weeks/:id', function (req, res) {
+	Week
+	.findOne({
+		where: { id: req.params.id },
+		include: [Matchup]
+	})
+	.then(function(week) {
+		week
+		.update(req.body)
+		.then(function(updatedWeek) {
+			res.send(updatedWeek);
+		});
+	});
+});
+
+//unrestricted for testing purposes only
+app.delete('/weeks/:id', function (req, res) {
+	Week
+	.findOne(req.params.id)
+	.then(function(week) {
+		week
+		.destroy()
+		.then(function(deletedWeek) {
+			res.send(deletedWeek);
+		});
+	});
+});
+
 ///////// SESSIONS //////////
 app.post('/sessions', function (req, res) {
 	var loginUsername = req.body.username;

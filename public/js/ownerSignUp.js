@@ -19,9 +19,9 @@ App.Views.NewOwner = Backbone.View.extend({
 
 	createOwner: function() {
 		var data = {
-			firstName: $('input[name="first-name"]').val(),
-			lastName: $('input[name="last-name"]').val(),
-			ownerBio: $('input[name="owner-bio"]').val(),
+			owner_first_name: $('input[name="first-name"]').val(),
+			owner_last_name: $('input[name="last-name"]').val(),
+			owner_bio: $('input[name="owner-bio"]').val(),
 			username: $('input[name="username"]').val(),
 			password: $('input[name="password"]').val()
 		};
@@ -34,8 +34,12 @@ App.Views.NewOwner = Backbone.View.extend({
 				data: data
 			})
 			.done(function(newOwner) {
-				sessionStorage.setItem('currentOwner', newOwner.id);
-				App.router.navigate('owner/' + newOwner.id, {trigger:true});
+		var ownerId = newOwner.id;
+				debugger;
+				sessionStorage.setItem('currentOwner', ownerId);
+				debugger;
+		App.router.navigate('owners/' + ownerId, {trigger:true});								
+				// App.router.navigate('owners/' + newOwner.id, {trigger:true});
 			});
 		}
 	},

@@ -14,17 +14,17 @@ App.Views.EditOwner = Backbone.View.extend({
 	},
 
 	events: {
-		"click .complete": "completeEdit",
-		"click .delete": "deleteOwner",
+		"click #complete-edit": "completeEdit",
+		"click #button-delete-account": "deleteOwner",
 		'click #go-back': 'cancel'
 	},
 
 	completeEdit: function() {
 		console.log('completed edit');
 		var data = {
-			firstName: $('input[name="first-name"]').val(),
-			lastName: $('input[name="last-name"]').val(),
-			ownerBio: $('input[name="owner-bio"]').val(),
+			owner_first_name: $('input[name="first-name"]').val(),
+			owner_last_name: $('input[name="last-name"]').val(),
+			owner_bio: $('input[name="owner-bio"]').val(),
 			username: $('input[name="username"]').val(),
 			password: $('input[name="password"]').val()
 		}
@@ -43,6 +43,7 @@ App.Views.EditOwner = Backbone.View.extend({
 	},
 
 	cancel: function() {
-		App.router.navigate('home', {trigger:true});
+		var ownerId = this.model.id;
+		App.router.navigate('owners/' + ownerId, {trigger:true});
 	}
 })

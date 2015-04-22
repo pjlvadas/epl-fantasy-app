@@ -24,11 +24,24 @@ App.Views.OwnerLogin = Backbone.View.extend({
 	login: function(e) {
 		if (e.keycode === 13 || e.type === 'click') {
 			var username = $('input[name="username"]').val();
-			var currentOwner = App.usersCollection.findWhere({username: username});
+			var password = $('input[name="password"]').val();			
+			var currentOwner = App.ownersCollection.findWhere({username: username});
 			var id = currentOwner.id;
-			sessionStorage.setItem("currentOwner", id);
-			App.router.navigate('owners/' + id, {trigger:true});
-		}
+
+			// sessionStorage.setItem("currentOwner", id);
+			$.post('/sessions', {
+				username: username,
+				password: password
+			})
+			.done(function() {
+				App.router.navigate('owners/' + id, {trigger:true});
+			})
+			.fail(function (response) {
+				var err = response.responseJSON;
+				alert(err.err + ' : ' + err.msg)
+			});
+			
+		}	
 	},
 
 	signUp: function() {

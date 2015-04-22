@@ -12,15 +12,22 @@ App.Views.Owner = Backbone.View.extend({
 		var renderedTemplate = this.overviewTemplate(this.model.toJSON());
 		this.$el.html(renderedTemplate);
 		$('#container').append(this.$el);
-		new App.Views.Team({collection: this.model.team});
+		// new App.Views.Team({collection: this.model.team});
 	},
 
 	events: {
-		'click button[name="button-edit-account"]': "ownerEditView",
-		'click button[name="button-delete-account"]': "ownerDelete",
-		'click button[name="button-log-out"]': "logOut",
-		'click button[name="button-new-league"]': "createLeagueView"
+		'click #button-edit-account': "ownerEditView",
+		'click #button-delete-account': "ownerDelete",
+		'click #button-log-out': "logOut",
+		'click #button-new-league': "createLeagueView"
 	},
+
+	logOut: function() {
+		console.log('Logging Out');
+		sessionStorage.setItem('currentOwner', '');
+		App.router.navigate('home', {trigger:true});
+		alert('Logged Out. See Ya.');
+	},	
 
 	ownerEditView: function() {
 		console.log('Edit Owner View Triggered');
@@ -30,5 +37,12 @@ App.Views.Owner = Backbone.View.extend({
 	createLeagueView: function() {
 		console.log('Create League View Triggered');
 		App.router.navigate('create_league', {trigger:true});
-	}
+	},
+
+	ownerDelete: function() {
+		alert('OWNER DESTROYED');
+		this.model.destroy();
+		sessionStorage.setItem('currentOwner', '');
+		App.router.navigate('home', {trigger: true});
+	}	
 });

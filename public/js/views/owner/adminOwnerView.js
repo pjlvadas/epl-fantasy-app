@@ -16,16 +16,17 @@ App.Views.Admin = Backbone.View.extend({
 	},
 
 	events: {
-		'click button[name="button-edit-account"]': "adminEditView",
-		'click button[name="button-delete-account"]': "adminDelete",
-		'click button[name="button-log-out"]': "logOut",
-		'click button[name="button-new-league"]': "createLeagueView",
+		'click #button-edit-account': "adminEditView",
+		'click #button-delete-account': "adminDelete",
+		'click #button-log-out': "logOut",
+		'click #button-new-league': "createLeagueView",
 
 	},
 
 	logOut: function() {
 		console.log('Logging Out');
 		sessionStorage.setItem('currentOwner', '');
+		App.router.navigate('home', {trigger:true});		
 		alert('Logged Out. See Ya.');
 	},
 
@@ -37,5 +38,12 @@ App.Views.Admin = Backbone.View.extend({
 	createLeagueView: function() {
 		console.log('Create League View Triggered');
 		App.router.navigate('create_league', {trigger:true});
+	},
+
+	adminDelete: function() {
+		alert('OWNER DESTROYED');
+		this.model.destroy();
+		sessionStorage.setItem('currentOwner', '');
+		App.router.navigate('home', {trigger: true});
 	}
 });

@@ -20,6 +20,7 @@ App.Views.NewLeague = Backbone.View.extend({
 	createLeague: function() {
 		var data = {
 			league_name: $('input[name="league-name"]').val(),
+			number_teams: $('input[name="number-teams"]').val(),
 			admin_id: 
 		};
 		if (App.leaguesCollection.findwhere({league_name: data.leagueName})) {

@@ -69,6 +69,7 @@
 		<input type="text" name="first-name" id="new-first-name" placeholder="First Name">
 		<input type="text" name="last-name" id="new-last-name" placeholder="Last Name">
 		<input type="text" name="owner-bio" id="owner-bio" placeholder="About You">
+		<input type="text" name="avatar" id="avatar" placeholder="image url">
 		<input type="text" name="username" id="new-username" placeholder="Username">
 		<input type="password" name="password" id="new-password" placeholder="Create Password">
 		<button id="create-owner">Submit</button>
@@ -80,6 +81,7 @@
 		<input type="text" name="first-name" id="new-first-name" value="{{owner_first_name}}">
 		<input type="text" name="last-name" id="new-last-name" value="{{owner_last_name}}">
 		<input type="text" name="owner-bio" id="owner-bio" value="{{owner_bio}}">
+		<input type="text" name="avatar" id="avatar" value="{{avatar}}">
 		<input type="text" name="username" id="new-username" value="{{username}}">
 		<input type="password" name="password" id="new-password" value="{{password}}">
 		<button id="complete-edit">Complete</button>
@@ -90,6 +92,7 @@
 	<template id="template-normal-overview">
 		<div id="overview-page" value="{{id}}">
 		<h2>{{owner_first_name}} {{owner_last_name}}</h2>
+		<img class="avatar" src="{{avatar}}">
 		<p>{{owner_bio}}</p>
     	<button id="button-edit-account">Edit Account</button>
     	<button id="button-log-out">Log Out</button>
@@ -98,6 +101,7 @@
 	<template id="template-admin-overview">
 		<div id="admin-overview-page" value="{{id}}">
 			<h2>{{owner_first_name}} {{owner_last_name}}</h2>
+			<img class="avatar" src="{{avatar}}">
 			<p>{{owner_bio}}</p>			
 			<button id="button-update-stats">Update Performances</button>
     		<button id="button-view-leagues">View Leagues</button>
@@ -118,7 +122,7 @@
 
 	<template id="template-create-league">
 		<h2>Create A League</h2>
-		<input type="text" name="league-name" id="new-league-name" value="League Name">
+		<input type="text" name="league-name" id="new-league-name" placeholder="League Name">
 		<input type="text" name="league-name" id="new-admin-id" placeholder="Admin ID#">
 		<p>Number of Teams <select name="number-teams">
 			<option value="four">4</option>

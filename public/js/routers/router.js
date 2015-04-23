@@ -71,7 +71,8 @@ App.router = Backbone.Router.extend({
 	editOwner: function(id) {
 		console.log('Edit Owner Route');
 		$('#container').empty();
-		$('#container').show();		
+		$('#container').show();
+		$('#sub-container').hide();		
 		$('#home-page').hide();
 		App.ownersCollection
 			.fetch()

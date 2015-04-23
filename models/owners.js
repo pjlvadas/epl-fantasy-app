@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
     username: DataTypes.STRING(20),
     password_digest: DataTypes.STRING,
     owner_bio: DataTypes.TEXT,
-    admin: DataTypes.BOOLEAN
+    admin: DataTypes.BOOLEAN,
+    avatar: DataTypes.TEXT
   }, {
 
     underscored: true,
@@ -15,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
      
     classMethods: {
       associate: function(models) {
-        owners.hasMany(models.teams, { foreignKey: 'owner_id' });
+        // owners.hasMany(models.teams, { foreignKey: 'owner_id' });
         owners.hasMany(models.leagues, { foreignKey: 'admin_id' });      
       }
     }

@@ -25,6 +25,7 @@ App.Views.EditOwner = Backbone.View.extend({
 			owner_first_name: $('input[name="first-name"]').val(),
 			owner_last_name: $('input[name="last-name"]').val(),
 			owner_bio: $('input[name="owner-bio"]').val(),
+			avatar: $('input[name="avatar"]').val(),
 			username: $('input[name="username"]').val(),
 			password: $('input[name="password"]').val()
 		}

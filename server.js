@@ -50,7 +50,7 @@ var authenticate = function (req, res, next) {
 //unrestricted for testing purposes only
 app.get('/owners', function (req, res) {
 	Owner
-	.findAll({include: Team})
+	.findAll()
 	.then(function(owners) {
 		res.send(owners);
 	});
@@ -60,9 +60,10 @@ app.post('/owners', function (req, res) {
 	var firstName = req.body.owner_first_name;
 	var lastName  = req.body.owner_last_name;
 	var ownerBio  = req.body.owner_bio;
+	var avatar 	  = req.body.avatar;
+	var admin 	  = req.body.admin;
 	var username  = req.body.username;
 	var password  = req.body.password;
-	var admin 	  = req.body.admin;
 
 	bcrypt.hash(password, 10, function (err, hash) {
 		Owner
@@ -70,8 +71,9 @@ app.post('/owners', function (req, res) {
 			owner_first_name: firstName,
 			owner_last_name: lastName,
 			owner_bio: ownerBio,
-			username: username,
+			avatar: avatar,
 			admin: false,
+			username: username,
 			password_digest: hash
 		})
 		.then(function(owner) {
@@ -84,8 +86,7 @@ app.post('/owners', function (req, res) {
 app.get('/owners/:id', authenticate, restrictAccess, function (req, res) {
 	Owner
 	.findOne({
-		where: {id: req.params.id},
-		include: Team
+		where: {id: req.params.id}
 	})
 	.then(function(owner) {
 		res.send(owner);
@@ -98,15 +99,15 @@ app.put('/owners/:id', function (req, res) {
 	var firstName = req.body.owner_first_name;
 	var lastName  = req.body.owner_last_name;
 	var ownerBio  = req.body.owner_bio;
+	var avatar 	  = req.body.avatar;
+	var admin 	  = req.body.admin;	
 	var username  = req.body.username;
 	var password  = req.body.password;
-	var admin 	  = req.body.admin;	
 
 	bcrypt.hash(password, 10, function (err, hash) {
 		Owner
 		.findOne({
-			where: { id: req.params.id },
-			include: Team
+			where: { id: req.params.id }
 		})
 		.then(function(owner) {
 			owner
@@ -114,8 +115,9 @@ app.put('/owners/:id', function (req, res) {
 				owner_first_name: firstName,
 				owner_last_name: lastName,
 				owner_bio: ownerBio,
-				username: username,
+				avatar: avatar,
 				admin: admin,
+				username: username,
 				password_digest: hash
 			})
 			.then(function(updatedOwner) {

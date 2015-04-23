@@ -41,7 +41,6 @@
 			<li><a href="#home">HOME</a></li>
 			<li><a href="#login">LOGIN</a></li>
 			<li><a href="#register">REGISTER</a></li>
-			</li>
 		</ul>
 	</nav>
 
@@ -57,10 +56,11 @@
 <!-- OWNER/ADMIN TEMPLATES -->
 
 	<template id="template-owner-log-in">
+		<h2>Owner Log-In</h2>		
 		<input type="text" name="username" id="username-log-in" placeholder="Enter Username">
 		<input type="password" name="password" id="password-log-in" placeholder="Enter Password">
 		<button name="button-log-in" id="button-log-in">Log In</button>
-		<p>Register New Owner</p>
+		<h4>Register New Owner</h4>
 		<button name="button-sign-up" id="button-sign-up">Sign Up</button>
 	</template>
 
@@ -151,15 +151,17 @@
 <!-- Player & Team TEMPLATES -->
 
 	<template id="template-player-view">
-		<h3>{{first_name}} {{last_name}}</h3>
-		<li>Home Country: {{country}}</li>
-		<li>Birthdate: {{birthdate}}</li>
-		<br>
-		<li>Position: {{position}}</li>
-		<li>Preferred Foot: {{preferred_foot}}</li>
-		<li>Height: {{height_in}} inches</li>
-		<li>Weight: {{weight_lb}} pounds</li>
+		<div class="player-view">
+			<h3>{{first_name}} {{last_name}}</h3>
+			<li>Home Country: {{country}}</li>
+			<li>Birthdate: {{birthdate}}</li>
+			<br>
+			<li>Position: {{position}}</li>
+			<li>Preferred Foot: {{preferred_foot}}</li>
+			<li>Height: {{height_in}} inches</li>
+			<li>Weight: {{weight_lb}} pounds</li>
 		<button id="button-add-player">Add {{first_name}} to Team</button>
+		</div>
 	</template>
 
 

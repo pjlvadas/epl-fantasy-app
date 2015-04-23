@@ -1,0 +1,138 @@
+body {
+		background-color: #FFFFFF;
+		background: url('http://kopworld.net/wp-content/uploads/2014/03/the-Kop-.jpg') no-repeat top;
+		background-size: 100%;
+		background-attachment: fixed;
+}
+
+#container {
+	margin-top: 65px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border: solid black .5px;
+	background-color: white;
+	opacity: .9;
+	border: solid black 1px;
+}
+
+#home-page {
+	margin-top: 80px;
+	padding-left: 30px;
+	margin-right: 750px;
+	border: solid black 1px;
+	background-color: white;
+	opacity: .7;
+
+}
+
+#sub-container {
+	margin-top: 5px;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	border: solid black .5px;
+	background-color: white;
+	opacity: .95;
+	border: solid black 1px;
+}
+
+.player-view {
+	list-style-type: none;
+	padding: 5px;
+	border-bottom: solid black 1px;
+	display: block;
+}
+
+.league-view {
+	list-style-type: none;
+	padding: 5px;
+	border-bottom: solid black 1px;	
+}
+
+
+.fixed-nav-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 56px;
+    background-color: #cc0000;
+	border: .5px solid #dedede;
+	border-radius: .5px;
+	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+	color: #888;
+	display: block;
+	margin: 0px 0px 0px 0px;
+	overflow: hidden;
+}
+
+.fixed-nav-bar ul {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	list-style-type: none;
+	position: fixed;
+}
+
+.fixed-nav-bar li {
+	display: inline-block;
+	width: 33%;
+	margin: 0;
+	padding: 0;
+}
+
+.fixed-nav-bar a {
+	text-align: center;
+	color: #ffd65e;
+	display: block;
+	line-height: 56px;
+	text-decoration: none;
+/*	padding: 0 100px;*/
+/*	padding: 0px 0 13px 0;*/
+}
+
+.fixed-nav-bar li:hover {
+	background: #ffd65e;
+	color: #cc0000;
+}
+
+.fixed-nav-bar li:hover a {
+	color: rgb(40, 44, 47);
+	text-decoration: none;
+}
+
+button {
+	background: #cc0000;
+	color: #ffd65e;
+/*	border-radius: 1px;*/
+}
+
+button:hover {
+	background: #ffd65e;
+	color: #cc0000;
+}
+
+button:active,
+button:focus {
+	background: #c42f2f;
+
+}
+
+button:before {
+/*	border-right-color: white;*/
+}
+
+button:focus:before,
+button:active:before {
+/*	border-right-color: #c42f2f;*/
+}
+
+.fa-logo {
+/*	padding-top: 10px;*/
+	height: 50px;
+	width: auto;
+}

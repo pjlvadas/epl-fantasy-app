@@ -10586,7 +10586,7 @@ var data =
 var seedDatabase = function() {
 	for (var i = 0; i < data.profile.length; i++ ) {
 		for (var j=0; j < data.profile[i].team.roster.player.length; j++) {
-			var faId = data.profile[i].team.roster.player[j].id;
+			var faId = parseInt(data.profile[i].team.roster.player[j].id);
 			var firstName = data.profile[i].team.roster.player[j].first_name;
 			var lastName = data.profile[i].team.roster.player[j].last_name;
 			var country = data.profile[i].team.roster.player[j].country;
@@ -10612,7 +10612,8 @@ var seedDatabase = function() {
 				height_in: heightIn,
 				weight_lb: weightLb,
 				full_first_name: fullFirstName,
-				full_last_name: fullLastName
+				full_last_name: fullLastName,
+				epl_team: eplTeam
 			})
 		}
 	}

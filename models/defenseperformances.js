@@ -14,10 +14,10 @@ module.exports = function(sequelize, DataTypes) {
     // timestamps: false,
         
     classMethods: {
-      associate: function(models) {
-        defensePerformances.belongsTo(models.players, { foreignKey: 'player_id'});
-        defensePerformances.belongsTo(models.weeks, { foreignKey: 'week_id'});
-      }
+      // associate: function(models) {
+      //   defensePerformances.belongsTo(models.players, { foreignKey: 'player_id'});
+      //   defensePerformances.belongsTo(models.weeks, { foreignKey: 'week_id'});
+      // }
     }
   });
   return defensePerformances;

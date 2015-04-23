@@ -13,14 +13,14 @@ module.exports = function(sequelize, DataTypes) {
      
     classMethods: {
       associate: function(models) {
-        teams.belongsTo(models.owners, { foreignKey: 'owner_id' });
-        teams.belongsTo(models.leagues, { foreignKey: 'league_id' });
+      //   teams.belongsTo(models.owners, { foreignKey: 'owner_id' });
+      //   teams.belongsTo(models.leagues, { foreignKey: 'league_id' });
 
-        teams.hasMany(models.matchups, { foreignKey: 'team_id' });
-        teams.hasMany(models.rosters, { foreignKey: 'team_id',
-                                         onDelete: 'cascade',
-                                         hooks: true });                                                         
-      }
+      //   teams.hasMany(models.matchups, { foreignKey: 'team_id' });
+      //   teams.hasMany(models.rosters, { foreignKey: 'team_id',
+      //                                    onDelete: 'cascade',
+      //                                    hooks: true });                                                         
+      // }
     }
   });
   return teams;

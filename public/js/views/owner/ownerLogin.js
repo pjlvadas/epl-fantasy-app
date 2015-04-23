@@ -28,7 +28,7 @@ App.Views.OwnerLogin = Backbone.View.extend({
 			var currentOwner = App.ownersCollection.findWhere({username: username});
 			var id = currentOwner.id;
 
-			// sessionStorage.setItem("currentOwner", id);
+			sessionStorage.setItem("currentOwner", id);
 			$.post('/sessions', {
 				username: username,
 				password: password

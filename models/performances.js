@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
       //   performances.belongsTo(models.players, { foreignKey: 'player_id' });
       //   performances.belongsTo(models.weeks, { foreignKey: 'week_id' });        
-      // }
+      }
     }
   });
   return performances;

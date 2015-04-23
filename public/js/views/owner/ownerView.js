@@ -19,8 +19,7 @@ App.Views.Owner = Backbone.View.extend({
 	events: {
 		'click #button-edit-account': "ownerEditView",
 		'click #button-delete-account': "ownerDelete",
-		'click #button-log-out': "logOut",
-		'click #button-new-league': "createLeagueView"
+		'click #button-log-out': "logOut"
 	},
 
 	logOut: function() {

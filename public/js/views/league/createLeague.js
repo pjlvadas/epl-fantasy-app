@@ -9,7 +9,7 @@ App.Views.NewLeague = Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template());
-		$('#container').append(this.$el);
+		$('#sub-container').append(this.$el);
 	},
 
 	events: {
@@ -20,12 +20,11 @@ App.Views.NewLeague = Backbone.View.extend({
 	createLeague: function() {
 		var data = {
 			league_name: $('input[name="league-name"]').val(),
-			number_teams: $('input[name="number-teams"]').val(),
-			admin_id: 
+			number_teams: $('input[name="number-teams"]').val()
 		};
-		if (App.leaguesCollection.findwhere({league_name: data.leagueName})) {
-			alert('League Name already taken. Please try again.')
-		} else {
+		// if (App.leaguesCollection.findwhere({league_name: data.league_name})) {
+		// 	alert('League Name already taken. Please try again.')
+		// } else {
 			$.ajax({
 				url: '/leagues',
 				method: 'POST',
@@ -33,9 +32,10 @@ App.Views.NewLeague = Backbone.View.extend({
 			})
 			.done(function(newLeague) {
 				var leagueId = newLeague.id;
-				App.router.navigate('/leagues/' + leagueId, {trigger:true});
+				sessionStorage.setItem('currentLeague', leagueId); 
+				App.router.navigate('leagues/' + leagueId, {trigger:true});
 			});
-		}
+		// }
 	},
 
 	goBack: function() {

@@ -10584,8 +10584,8 @@ var data =
 };
 
 var seedDatabase = function() {
-	for (var i = 0, i < data.profile.length; i++ ) {
-		for (var j=0, j < data.profile[i].team.roster.player.length; j++) {
+	for (var i = 0; i < data.profile.length; i++ ) {
+		for (var j=0; j < data.profile[i].team.roster.player.length; j++) {
 			var faId = data.profile[i].team.roster.player[j].id;
 			var firstName = data.profile[i].team.roster.player[j].first_name;
 			var lastName = data.profile[i].team.roster.player[j].last_name;
@@ -10621,4 +10621,4 @@ var seedDatabase = function() {
 
 seedDatabase();
 
-
+console.log("Cool");

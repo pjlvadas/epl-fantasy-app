@@ -10,7 +10,7 @@ App.Views.EditOwner = Backbone.View.extend({
 	render: function() {
 		var renderedTemplate = this.template(this.model.toJSON());
 		this.$el.html(renderedTemplate);
-		$('#container').append(this.$el);
+		$('#sub-container').append(this.$el);
 	},
 
 	events: {

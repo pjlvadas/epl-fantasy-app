@@ -37,6 +37,7 @@ App.router = Backbone.Router.extend({
 		console.log('Login Route');
 		$('#container').empty();
 		$('#container').show();
+		$('#sub-container').hide();
 		$('#home-page').hide();
 		new App.Views.OwnerLogin();
 	},
@@ -64,15 +65,16 @@ App.router = Backbone.Router.extend({
 		console.log('Create Owner Route');
 		$('#container').empty();
 		$('#container').show();
+		$('#sub-container').hide();
 		$('#home-page').hide();
 		new App.Views.NewOwner();
 	},
 
 	editOwner: function(id) {
 		console.log('Edit Owner Route');
-		$('#container').empty();
 		$('#container').show();
-		$('#sub-container').hide();		
+		$('#sub-container').empty();
+		$('#sub-container').show();
 		$('#home-page').hide();
 		App.ownersCollection
 			.fetch()
@@ -84,6 +86,7 @@ App.router = Backbone.Router.extend({
 
 	newLeague: function() {
 		console.log('Create League Route');
+		$('#container').show();
 		$('#sub-container').empty();
 		$('#sub-container').show();
 		$('#home-page').hide();

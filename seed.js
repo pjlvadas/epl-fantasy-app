@@ -10600,7 +10600,7 @@ var seedDatabase = function() {
 			var fullLastName = data.profile[i].team.roster.player[j].full_last_name;
 
 			Player.create({
-				fa_id: faId,
+				// fa_id: faId,
 				first_name: firstName,
 				last_name: lastName,
 				country: country,

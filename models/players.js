@@ -25,12 +25,12 @@ module.exports = function(sequelize, DataTypes) {
      
     classMethods: {
       associate: function(models) {
-        players.hasMany(models.offensePerformances, { foreignKey: 'player_id' });
-        players.hasMany(models.defensePerformances, { foreignKey: 'player_id' });
-        players.hasMany(models.goaliePerformances, { foreignKey: 'player_id' });
-        players.hasMany(models.performances, { foreignKey: 'player_id' });        
+        // players.hasMany(models.offensePerformances, { foreignKey: 'player_id' });
+        // players.hasMany(models.defensePerformances, { foreignKey: 'player_id' });
+        // players.hasMany(models.goaliePerformances, { foreignKey: 'player_id' });
+        // players.hasMany(models.performances, { foreignKey: 'player_id' });        
 
-        players.belongsTo(models.rosters, { foreignKey: 'player_id' });                        
+        // players.belongsTo(models.rosters, { foreignKey: 'player_id' });                        
       }
     }
   });

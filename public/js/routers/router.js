@@ -10,7 +10,8 @@ App.router = Backbone.Router.extend({
 		'owners/:id': 'owner',
 		'register': 'registerOwner',
 		'edit_owner/:id': 'editOwner',
-		'create_league': 'createLeague'
+		'create_league': 'createLeague',
+		'leagues/:id': 'viewLeague'
 	},
 
 	homepage: function() {
@@ -22,6 +23,7 @@ App.router = Backbone.Router.extend({
 		}
 		else {
 			$('#container').hide();
+			$('#sub-container').hide();
 			$('#home-page').show();
 		}
 	},
@@ -75,7 +77,22 @@ App.router = Backbone.Router.extend({
 	},
 
 	createLeague: function() {
+		console.log('Create League Route');
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		new App.Views.NewLeague();
+	},
 
+	viewLeague: function(id) {
+		console.log('All Leagues Route')
+		$('#container').show();
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		var league = App.leaguesCollection.get(id);
+		new App.Views.Leage({model: league});
 	}
+
 
 });

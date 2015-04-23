@@ -6,21 +6,24 @@
 	<link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">	
-	<script type="text/javascript" src="path/xmlToJSON.js"></script>
 	<script src='bundle.js'></script>
 	<script src='js/app.js'></script>
 
 	<script src='js/models/owner.js'></script>
+	<script src='js/models/league.js'></script>
 
 	<script src='js/collections/owners.js'></script>
+	<script src='js/collections/leagues.js'></script>	
 
 	<script src='js/views/owner/adminOwnerView.js'></script>	
+	<script src='js/views/owner/ownerView.js'></script>
 	<script src='js/views/owner/editOwnerView.js'></script>
 	<script src='js/views/owner/ownerListView.js'></script>
-	<script src='js/views/owner/ownerView.js'></script>
+	<script src='js/views/owner/ownerLogin.js'></script>	
+	<script src='js/views/owner/ownerSignUp.js'></script>
+	<script src='js/views/league/createLeague.js'></script>
+	<script src='js/views/league/leagueView.js'></script>	
 
-	<script src='js/ownerLogin.js'></script>	
-	<script src='js/ownerSignUp.js'></script>
 	<script src='js/routers/router.js'></script>
 
 </head>
@@ -35,6 +38,7 @@
 	</nav>
 
 	<div id="container"></div>
+	<div id="sub-container"></div>
 
 	<div id="home-page">
 		<div id="welcome">
@@ -75,7 +79,9 @@
 
 	<template id="template-normal-overview">
 		<div id="overview-page" value="{{id}}">
-    	<button id="button-new-league">Create New League</button>
+<!--     	<button id="button-new-league">Create New League</button> -->
+		<h2>{{owner_first_name}} {{owner_last_name}}</h2>
+		<p>{{owner_bio}}</p>
     	<button id="button-edit-account">Edit Account</button>
 <!--     	<button id="button-delete-account">Delete Account</button>		 -->
     	<button id="button-log-out">Log Out</button>
@@ -83,8 +89,10 @@
 
 	<template id="template-admin-overview">
 		<div id="admin-overview-page" value="{{id}}">
+		<h2>{{owner_first_name}} {{owner_last_name}}</h2>
+		<p>{{owner_bio}}</p>			
 		<button id="update-stats">Update Performances</button>
-
+    	<button id="button-view-league">View Leagues</button>
     	<button id="button-new-league">Create New League</button>
     	<button id="button-edit-account">Edit Account</button>
 <!--     	<button id="button-delete-account">Delete Account</button> -->	
@@ -107,21 +115,14 @@
 	<template id="template-league-view">
 		<div class="league-view" value="{{id}}">
 			<h2>{{league_name}}</h2>
-			<h3>Current Standings</h3>
-			<ul class="league-standings">
-				<li class="league-team">{{team_name}}</li>
-				<li class="league-team-points"></li>
-			</ul>
-		</div>
-		<div class="league-matchups">
 		</div>
 	</template>
 
 	<template id="template-create-league">
-		<h2>Register Owner</h2>
+		<h2>Create A League</h2>
 		<input type="text" name="league-name" id="new-league-name" placeholder="League Name">
 		<input type="text" name="number-teams" id="number-teams" placeholder="How Many Teams?">
-		<input type="text" name="league-comissioner" id="league-commissioner" placeholder="Leage Commissioner ID">
+		<!-- <input type="text" name="league-comissioner" id="league-commissioner" placeholder="Leage Commissioner ID"> -->
 		<button id="create-league">Create</button>
 		<button id="go-back">Go Back</button>
 	</template>

@@ -143,7 +143,7 @@ app.delete('/owners/:id', function (req, res) {
 //unrestricted for testing purposes only
 app.get('/leagues', function (req, res) {
 	League
-	.findAll({include: Owner})
+	.findAll({include: [Owner]})
 	.then(function(leagues) {
 		res.send(leagues);
 	});
@@ -486,6 +486,42 @@ app.delete('/weeks/:id', function (req, res) {
 	});
 });
 
+
+
+////////////////PLAYER////////////////////
+//unrestricted for testing purposes only
+app.get('/players', function (req, res) {
+	Player
+	.findAll()
+	.then(function(players) {
+		res.send(players);
+	});
+});
+
+app.get('/players/:id', authenticate, restrictAccess, function (req, res) {
+	Player
+	.findOne({
+		where: {id: req.params.id}
+	})
+	.then(function(player) {
+		res.send(player);
+	});
+});
+
+
+//unrestricted for testing purposes only
+app.delete('/players/:id', function (req, res) {
+	Player
+	.findOne(req.params.id)
+	.then(function(player) {
+		player
+		.destroy()
+		.then(function(deletedPlayer) {
+			res.send(deletedPlayer);
+		});
+	});
+});
+
 ///////// SESSIONS //////////
 app.post('/sessions', function (req, res) {
 	var loginUsername = req.body.username;
@@ -528,40 +564,6 @@ app.get('/current_owner', function (req, res) {
 	.findOne({ where: {id: req.session.currentOwner}, include: Team})
 	.then(function(owner) {
 		res.send(owner);
-	});
-});
-
-////////////////PLAYER////////////////////
-//unrestricted for testing purposes only
-app.get('/players', function (req, res) {
-	Player
-	.findAll()
-	.then(function(players) {
-		res.send(players);
-	});
-});
-
-app.get('/players/:id', authenticate, restrictAccess, function (req, res) {
-	Player
-	.findOne({
-		where: {id: req.params.id}
-	})
-	.then(function(player) {
-		res.send(player);
-	});
-});
-
-
-//unrestricted for testing purposes only
-app.delete('/players/:id', function (req, res) {
-	Player
-	.findOne(req.params.id)
-	.then(function(player) {
-		player
-		.destroy()
-		.then(function(deletedPlayer) {
-			res.send(deletedPlayer);
-		});
 	});
 });
 

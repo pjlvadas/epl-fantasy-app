@@ -11,6 +11,8 @@
 
 	<script src='js/models/owner.js'></script>
 	<script src='js/models/league.js'></script>
+	<script src='js/models/player.js'></script>
+
 
 	<script src='js/collections/owners.js'></script>
 	<script src='js/collections/leagues.js'></script>	
@@ -18,11 +20,12 @@
 	<script src='js/views/owner/adminOwnerView.js'></script>	
 	<script src='js/views/owner/ownerView.js'></script>
 	<script src='js/views/owner/editOwnerView.js'></script>
-	<script src='js/views/owner/ownerListView.js'></script>
+	<script src='js/views/owner/ownersListView.js'></script>
 	<script src='js/views/owner/ownerLogin.js'></script>	
 	<script src='js/views/owner/ownerSignUp.js'></script>
 	<script src='js/views/league/createLeague.js'></script>
-	<script src='js/views/league/leagueView.js'></script>	
+	<script src='js/views/league/leagueView.js'></script>
+	<script src='js/views/player/playerView.js'></script>
 
 	<script src='js/routers/router.js'></script>
 
@@ -79,11 +82,9 @@
 
 	<template id="template-normal-overview">
 		<div id="overview-page" value="{{id}}">
-<!--     	<button id="button-new-league">Create New League</button> -->
 		<h2>{{owner_first_name}} {{owner_last_name}}</h2>
 		<p>{{owner_bio}}</p>
     	<button id="button-edit-account">Edit Account</button>
-<!--     	<button id="button-delete-account">Delete Account</button>		 -->
     	<button id="button-log-out">Log Out</button>
 	</template>
 
@@ -91,8 +92,8 @@
 		<div id="admin-overview-page" value="{{id}}">
 		<h2>{{owner_first_name}} {{owner_last_name}}</h2>
 		<p>{{owner_bio}}</p>			
-		<button id="update-stats">Update Performances</button>
-    	<button id="button-view-league">View Leagues</button>
+		<button id="button-update-stats">Update Performances</button>
+    	<button id="button-view-leagues">View Leagues</button>
     	<button id="button-new-league">Create New League</button>
     	<button id="button-edit-account">Edit Account</button>
 <!--     	<button id="button-delete-account">Delete Account</button> -->	
@@ -115,6 +116,16 @@
 	<template id="template-league-view">
 		<div class="league-view" value="{{id}}">
 			<h2>{{league_name}}</h2>
+			<button id="league-add-team">Add Team</button>
+			<button id="go-back">Go Back</button>
+		</div>
+	</template>
+
+	<template id="template-all-leagues">
+		<div class="all-leagues" value="{{id}}">
+		{{#each this}}
+			<p>{{league_name}}</p>
+		{{/each}}
 		</div>
 	</template>
 
@@ -126,6 +137,21 @@
 		<button id="create-league">Create</button>
 		<button id="go-back">Go Back</button>
 	</template>
+
+	<template id="template-player-view">
+		<h2>Premier League Players</h2>
+		{{#each this}}
+		<li>{{first_name}} {{last_name</li>
+		<li>Country: {{country}}</li>
+		<li>Birthdate: {{birthdate}}</li>
+		<br>
+		<li>Position: {{position}}</li>
+		<li>Preferred Foot: {{preferred_foot}}</li>
+		<li>Height: {{height_in}} inches</li>
+		<li>Weight: {{weight_lb}} pounds</li>
+		{{/each}}
+	</template>
+
 
 
 

@@ -4,7 +4,7 @@ App.Views.League = Backbone.View.extend({
 
 	initialize: function() {
 		console.log('new LEAGUE VIEW created');
-		this.leagueTemplate = Handlebars.compile($('#template-create-league').html());
+		this.leagueTemplate = Handlebars.compile($('#template-league-view').html());
 		this.renderView();
 	},
 
@@ -15,8 +15,15 @@ App.Views.League = Backbone.View.extend({
 	},
 
 	events: {
+		'click #go-back': 'goBack',
+		'click #add-team': 'addTeam'		
+	},
+
+	goBack: function() {
+		App.router.navigate('home', {trigger:true});
+	},
+
+	addTeam: function() {
 
 	}
-
-
 });

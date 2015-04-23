@@ -10,19 +10,22 @@ App.router = Backbone.Router.extend({
 		'owners/:id': 'owner',
 		'register': 'registerOwner',
 		'edit_owner/:id': 'editOwner',
-		'create_league': 'createLeague',
-		'leagues/:id': 'viewLeague'
+		'create_league': 'newLeague',
+		'leagues/:id': 'viewLeague',
+		'all_players': 'viewPlayers'
 	},
 
 	homepage: function() {
 		$('#home-page').hide();
 		if (sessionStorage.getItem('currentOwner')) {
 			$('#container').empty();
+			$('#sub-container').hide();
 			var ownerId = sessionStorage.getItem('currentOwner');
 			App.router.navigate('owners/' + ownerId, {trigger: true});
 		}
 		else {
 			$('#container').hide();
+			$('#sub-container').empty();
 			$('#sub-container').hide();
 			$('#home-page').show();
 		}
@@ -76,7 +79,7 @@ App.router = Backbone.Router.extend({
 			});
 	},
 
-	createLeague: function() {
+	newLeague: function() {
 		console.log('Create League Route');
 		$('#sub-container').empty();
 		$('#sub-container').show();
@@ -85,14 +88,25 @@ App.router = Backbone.Router.extend({
 	},
 
 	viewLeague: function(id) {
-		console.log('All Leagues Route')
+		console.log(id);
 		$('#container').show();
 		$('#sub-container').empty();
 		$('#sub-container').show();
 		$('#home-page').hide();
-		var league = App.leaguesCollection.get(id);
-		new App.Views.Leage({model: league});
-	}
+		App.leaguesCollection
+			.fetch()
+			.done(function() {
+				var league = App.leaguesCollection.get(id);
+				new App.Views.League({model: league})
+			});
+	},
 
+	viewPlayers: function() {
+		$('#container').show();
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		new App.Views.Player();	
+	}
 
 });

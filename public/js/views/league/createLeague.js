@@ -18,7 +18,6 @@ App.Views.NewLeague = Backbone.View.extend({
 	},
 
 	createLeague: function() {
-		debugger;
 		var data = {
 			league_name: $('input[name="league-name"]').val(),
 			number_teams: $('input[name="number-teams"]').val()

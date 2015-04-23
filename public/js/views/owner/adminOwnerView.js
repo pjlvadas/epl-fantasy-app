@@ -21,7 +21,7 @@ App.Views.Admin = Backbone.View.extend({
 		'click #button-delete-account': "adminDelete",
 		'click #button-log-out': "logOut",
 		'click #button-new-league': "createLeagueView",
-		'click #button-view-leagues': "viewLeagues"
+		'click #button-update-stats': "viewPlayers"
 
 	},
 
@@ -42,16 +42,15 @@ App.Views.Admin = Backbone.View.extend({
 		App.router.navigate('create_league', {trigger:true});
 	},
 
-	viewLeagues: function() {
-		console.log('View League Triggered');
-		var league = App.leaguesCollection.get(id);
-		App.router.navigate('leagues/' + league.id, {trigger:true});
-	},
-
 	adminDelete: function() {
 		alert('OWNER DESTROYED');
 		this.model.destroy();
 		sessionStorage.setItem('currentOwner', '');
 		App.router.navigate('home', {trigger: true});
+	},
+
+	viewPlayers: function() {
+		console.log('ALL PLAYERS Triggered');
+		App.router.navigate('all_players', {trigger:true});
 	}
 });

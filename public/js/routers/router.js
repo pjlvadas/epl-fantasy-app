@@ -8,20 +8,27 @@ App.router = Backbone.Router.extend({
 		'home': 'homepage',
 		'login': 'login',
 		'owners/:id': 'owner',
-		'register': 'registerOwner',
 		'edit_owner/:id': 'editOwner',
-		'create_league': 'createLeague'
+		'register': 'registerOwner',
+		'leagues/:id': 'viewLeague',
+		'edit_league/:id': 'editLeague',
+		'create_league': 'newLeague',
+		'all_leagues': 'viewAllLeagues',
+		'all_players': 'viewAllPlayers'
 	},
 
 	homepage: function() {
 		$('#home-page').hide();
 		if (sessionStorage.getItem('currentOwner')) {
 			$('#container').empty();
+			$('#sub-container').hide();
 			var ownerId = sessionStorage.getItem('currentOwner');
 			App.router.navigate('owners/' + ownerId, {trigger: true});
 		}
 		else {
 			$('#container').hide();
+			$('#sub-container').empty();
+			$('#sub-container').hide();
 			$('#home-page').show();
 		}
 	},
@@ -74,8 +81,56 @@ App.router = Backbone.Router.extend({
 			});
 	},
 
-	createLeague: function() {
+	newLeague: function() {
+		console.log('Create League Route');
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		new App.Views.NewLeague();
+	},
 
+	viewLeague: function(id) {
+		console.log(id);
+		$('#container').show();
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		App.leaguesCollection
+			.fetch()
+			.done(function() {
+				var league = App.leaguesCollection.get(id);
+				new App.Views.League({model: league})
+			});
+	},
+
+	viewAllLeagues: function() {
+		$('#container').show();
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		new App.Views.LeaguesListView({collection: App.leaguesCollection});		
+	},
+
+	editLeague: function(id) {
+		console.log('Edit League Route');
+		$('#container').show();
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		App.leaguesCollection
+			.fetch()
+			.done(function() {
+				var leagueModel = App.leaguesCollection.get(id);
+				new App.Views.EditLeague({model: leagueModel});
+			});
+	},
+
+	viewAllPlayers: function() {
+		$('#container').show();
+		$('#sub-container').empty();
+		$('#sub-container').show();
+		$('#home-page').hide();
+		new App.Views.PlayersListView({collection: App.playersCollection});	
 	}
 
 });

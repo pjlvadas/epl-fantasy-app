@@ -6,21 +6,32 @@
 	<link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">	
-	<script type="text/javascript" src="path/xmlToJSON.js"></script>
 	<script src='bundle.js'></script>
 	<script src='js/app.js'></script>
 
 	<script src='js/models/owner.js'></script>
+	<script src='js/models/league.js'></script>
+	<script src='js/models/player.js'></script>
 
 	<script src='js/collections/owners.js'></script>
+	<script src='js/collections/leagues.js'></script>	
+	<script src='js/collections/players.js'></script>
 
 	<script src='js/views/owner/adminOwnerView.js'></script>	
-	<script src='js/views/owner/editOwnerView.js'></script>
-	<script src='js/views/owner/ownerListView.js'></script>
 	<script src='js/views/owner/ownerView.js'></script>
+	<script src='js/views/owner/editOwnerView.js'></script>
+	<script src='js/views/owner/ownersListView.js'></script>
+	<script src='js/views/owner/ownerLogin.js'></script>	
+	<script src='js/views/owner/ownerSignUp.js'></script>
+	
+	<script src='js/views/league/createLeague.js'></script>
+	<script src='js/views/league/leagueView.js'></script>
+	<script src='js/views/league/leaguesListView.js'></script>
+	<script src='js/views/league/editLeagueView.js'></script>
+	
+	<script src='js/views/player/playerView.js'></script>
+	<script src='js/views/player/playersListView.js'></script>
 
-	<script src='js/ownerLogin.js'></script>	
-	<script src='js/ownerSignUp.js'></script>
 	<script src='js/routers/router.js'></script>
 
 </head>
@@ -35,12 +46,15 @@
 	</nav>
 
 	<div id="container"></div>
+	<div id="sub-container"></div>
 
 	<div id="home-page">
 		<div id="welcome">
 		<h1>EPL FANTASY FOOTBALL</h1>
 		</div>
 	</div>	
+
+<!-- OWNER/ADMIN TEMPLATES -->
 
 	<template id="template-owner-log-in">
 		<input type="text" name="username" id="username-log-in" placeholder="Enter Username">
@@ -70,26 +84,80 @@
 		<input type="password" name="password" id="new-password" value="{{password}}">
 		<button id="complete-edit">Complete</button>
 		<button id="go-back">Go Back</button>
-		<button id="button-delete-account">Delete Account</button>		
+		<button id="button-delete-account">Delete Account</button>	
 	</template>	
 
 	<template id="template-normal-overview">
 		<div id="overview-page" value="{{id}}">
-    	<button id="button-new-league">Create New League</button>
+		<h2>{{owner_first_name}} {{owner_last_name}}</h2>
+		<p>{{owner_bio}}</p>
     	<button id="button-edit-account">Edit Account</button>
-<!--     	<button id="button-delete-account">Delete Account</button>		 -->
     	<button id="button-log-out">Log Out</button>
 	</template>
 
 	<template id="template-admin-overview">
 		<div id="admin-overview-page" value="{{id}}">
-		<button id="update-stats">Update Performances</button>
-
-    	<button id="button-new-league">Create New League</button>
-    	<button id="button-edit-account">Edit Account</button>
-<!--     	<button id="button-delete-account">Delete Account</button> -->	
-    	<button id="button-log-out">Log Out</button>			
+			<h2>{{owner_first_name}} {{owner_last_name}}</h2>
+			<p>{{owner_bio}}</p>			
+			<button id="button-update-stats">Update Performances</button>
+    		<button id="button-view-leagues">View Leagues</button>
+    		<button id="button-new-league">Create New League</button>
+    		<button id="button-edit-account">Edit Account</button>
+    		<button id="button-log-out">Log Out</button>
+    	</div>			
 	</template>
+
+<!-- LEAGUE TEMPLATES -->
+
+	<template id="template-league-view">
+		<div id="league-view" data-value="{{id}}">
+			<li>{{league_name}}</li>
+			<button id="button-edit-league">Edit League</button>
+		</div>
+	</template>
+
+	<template id="template-create-league">
+		<h2>Create A League</h2>
+		<input type="text" name="league-name" id="new-league-name" value="League Name">
+		<input type="text" name="league-name" id="new-admin-id" placeholder="Admin ID#">
+		<p>Number of Teams <select name="number-teams">
+			<option value="four">4</option>
+			<option value="six">6</option>				
+			<option value="eight">8</option>
+			<option value="ten">10</option>
+		</select></p>
+		<button id="create-league">Create</button>
+		<button id="go-back">Go Back</button>
+	</template>
+
+	<template id="template-edit-league">
+		<input type="text" name="league-name" id="new-league-name" value="{{league_name}}">
+		<input type="text" name="admin-id" id="new-admin-id" value="{{admin_id}}">
+		<p>Number of Teams <select name="number-teams" value="{{number_teams}}">
+			<option value="four">4</option>
+			<option value="six">6</option>				
+			<option value="eight">8</option>
+			<option value="ten">10</option>
+		</select></p>
+		<button id="complete-edit">Complete</button>
+		<button id="go-back">Go Back</button>
+		<button id="button-delete-league">Delete League</button>
+	</template>
+	
+<!-- Player & Team TEMPLATES -->
+
+	<template id="template-player-view">
+		<h3>{{first_name}} {{last_name}}</h3>
+		<li>Home Country: {{country}}</li>
+		<li>Birthdate: {{birthdate}}</li>
+		<br>
+		<li>Position: {{position}}</li>
+		<li>Preferred Foot: {{preferred_foot}}</li>
+		<li>Height: {{height_in}} inches</li>
+		<li>Weight: {{weight_lb}} pounds</li>
+		<button id="button-add-player">Add {{first_name}} to Team</button>
+	</template>
+
 
 	<template id="template-team-view">
 		<div class="team-view" value="{{id}}">
@@ -103,29 +171,6 @@
 		</ul>
 		</div>
 	</template>
-
-	<template id="template-league-view">
-		<div class="league-view" value="{{id}}">
-			<h2>{{league_name}}</h2>
-			<h3>Current Standings</h3>
-			<ul class="league-standings">
-				<li class="league-team">{{team_name}}</li>
-				<li class="league-team-points"></li>
-			</ul>
-		</div>
-		<div class="league-matchups">
-		</div>
-	</template>
-
-	<template id="template-create-league">
-		<h2>Register Owner</h2>
-		<input type="text" name="league-name" id="new-league-name" placeholder="League Name">
-		<input type="text" name="number-teams" id="number-teams" placeholder="How Many Teams?">
-		<input type="text" name="league-comissioner" id="league-commissioner" placeholder="Leage Commissioner ID">
-		<button id="create-league">Create</button>
-		<button id="go-back">Go Back</button>
-	</template>
-
 
 
 </body>

@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       //     foreignKey: 'team_id'
       //   });
 
-      // }
+      }
     }
   });
   return matchups;

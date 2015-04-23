@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       //   weeks.hasMany(models.defensePerformances, { foreignKey: 'week_id' });
       //   weeks.hasMany(models.goaliePerformances, { foreignKey: 'week_id' });                                                 
 
-      // }
+      }
     }
   });
   return weeks;

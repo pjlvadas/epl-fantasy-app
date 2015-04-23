@@ -46,4 +46,4 @@ App.Views.EditOwner = Backbone.View.extend({
 		var ownerId = this.model.id;
 		App.router.navigate('owners/' + ownerId, {trigger:true});
 	}
-})
+});

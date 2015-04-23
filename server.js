@@ -8,6 +8,7 @@ var bcrypt			 = require('bcrypt');
 var request 		 = require('request');
 var path 			 = require('path');
 var models 			 = require(__dirname + '/models');
+var xmltojson		 = require('xmltojson');
 
 var app              = express();
 
@@ -532,9 +533,5 @@ app.get('/current_owner', function (req, res) {
 
 
 app.use(express.static('./public'));
-
-// app.listen(3000, function() {
-// 	console.log('Server listening on 30000000000000');
-// });
 
 module.exports = app;

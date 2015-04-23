@@ -1,3 +1,4 @@
+<alldata>
 <team id="65da41c2-5231-42a1-acb9-7fe295b12fc7" name="Queens Park Rangers"/>
 <profile xmlns="http://feed.elasticstats.com/schema/soccer/sr/v2/teams-profile.xsd" generated="2015-04-19T17:52:26Z">
 <team id="65da41c2-5231-42a1-acb9-7fe295b12fc7" name="Queens Park Rangers" alias="QPR" country_code="ENG" country="England" type="team">
@@ -1028,3 +1029,4 @@
 <!--  96  -->
 </team>
 </profile>
+</alldata>

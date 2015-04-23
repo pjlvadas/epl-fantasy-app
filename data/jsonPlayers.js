@@ -1,17 +1,3 @@
-var application_root = __dirname;
-var express          = require('express');
-var bodyParser 		 = require('body-parser');
-var path 			 = require('path');
-var logger 			 = require('morgan');
-var session			 = require('express-session');
-var bcrypt			 = require('bcrypt');
-var request 		 = require('request');
-var path 			 = require('path');
-var models 			 = require(__dirname + '/models');
-var fs 				 = require('fs');
-
-var Player			 = models.players;
-
 var data = 
 {
    "team": [
@@ -10583,42 +10569,4 @@ var data =
    ]
 };
 
-var seedDatabase = function() {
-	for (var i = 0, i < data.profile.length; i++ ) {
-		for (var j=0, j < data.profile[i].team.roster.player.length; j++) {
-			var faId = data.profile[i].team.roster.player[j].id;
-			var firstName = data.profile[i].team.roster.player[j].first_name;
-			var lastName = data.profile[i].team.roster.player[j].last_name;
-			var country = data.profile[i].team.roster.player[j].country;
-			var countryCode = data.profile[i].team.roster.player[j].country_code;
-			var birthdate = data.profile[i].team.roster.player[j].birthdate;
-			var position = data.profile[i].team.roster.player[j].position;
-			var preferredFoot = data.profile[i].team.roster.player[j].preferred_foot;
-			var heightIn = data.profile[i].team.roster.player[j].height_in;
-			var weightLb = data.profile[i].team.roster.player[j].weight_lb;
-			var fullFirstName = data.profile[i].team.roster.player[j].full_first_name;
-			var fullLastName = data.profile[i].team.roster.player[j].full_last_name;
-			var eplTeam = data.profile[i].team;
-
-			Player.create({
-				fa_id: faId,
-				first_name: firstName,
-				last_name: lastName,
-				country: country,
-				country_code: countryCode,
-				birthdate: birthdate,
-				position: position,
-				preferred_foot: preferredFoot,
-				height_in: heightIn,
-				weight_lb: weightLb,
-				full_first_name: fullFirstName,
-				full_last_name: fullLastName,
-				epl_team: eplTeam
-			})
-		}
-	}
-}
-
-seedDatabase();
-
-
+console.log(data.profile[0]);

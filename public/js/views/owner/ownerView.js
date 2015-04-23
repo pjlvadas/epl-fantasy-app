@@ -5,6 +5,7 @@ App.Views.Owner = Backbone.View.extend({
 	initialize: function() {
 		console.log('new OWNER VIEW created');
 		this.overviewTemplate = Handlebars.compile($('#template-normal-overview').html());
+		sessionStorage.setItem('currentOwner', this.model.id);		
 		this.renderView();
 	},
 

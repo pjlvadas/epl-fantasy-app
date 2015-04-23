@@ -13,13 +13,13 @@ module.exports = function(sequelize, DataTypes) {
      
     classMethods: {
       associate: function(models) {
-        matchups.belongsTo(models.weeks, { foreignKey: 'week_id'});
-        matchups.belongsToMany(models.teams, {
-          through: 'matchups_teams',
-          foreignKey: 'team_id'
-        });
+      //   matchups.belongsTo(models.weeks, { foreignKey: 'week_id'});
+      //   matchups.belongsToMany(models.teams, {
+      //     through: 'matchups_teams',
+      //     foreignKey: 'team_id'
+      //   });
 
-      }
+      // }
     }
   });
   return matchups;

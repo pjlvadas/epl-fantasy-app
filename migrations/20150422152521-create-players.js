@@ -8,20 +8,53 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      player_first_name: {
+      fa_id: {
+        type: DataTypes.INTEGER
+      },
+      first_name: {
         type: DataTypes.STRING
       },
-      player_last_name: {
+      last_name: {
         type: DataTypes.STRING
+      },
+      country: {
+        type: DataTypes.STRING
+      },
+      birthdate: {
+        type: DataTypes.DATE
       },
       position: {
+        type: DataTypes.STRING
+      },
+      preferred_foot: {
+        type: DataTypes.STRING
+      },
+      height_in: {
+        type: DataTypes.INTEGER
+      },
+      weight_lb: {
+        type: DataTypes.INTEGER
+      },
+      country_code: {
+        type: DataTypes.STRING(3)
+      },
+      full_first_name: {
+        type: DataTypes.STRING
+      },
+      full_last_name: {
         type: DataTypes.STRING
       },
       epl_team: {
         type: DataTypes.STRING
       },
-      home_country: {
-        type: DataTypes.STRING
+      epl_team_id: {
+        type: DataTypes.INTEGER
+      },
+      team_id: {
+        type: DataTypes.INTEGER
+      },
+      roster_id: {
+        type: DataTypes.INTEGER
       },
       created_at: {
         allowNull: false,

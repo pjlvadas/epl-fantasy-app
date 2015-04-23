@@ -10612,8 +10612,7 @@ var seedDatabase = function() {
 				height_in: heightIn,
 				weight_lb: weightLb,
 				full_first_name: fullFirstName,
-				full_last_name: fullLastName,
-				epl_team: eplTeam
+				full_last_name: fullLastName
 			})
 		}
 	}

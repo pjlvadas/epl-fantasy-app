@@ -531,6 +531,39 @@ app.get('/current_owner', function (req, res) {
 	});
 });
 
+////////////////PLAYER////////////////////
+//unrestricted for testing purposes only
+app.get('/players', function (req, res) {
+	Player
+	.findAll()
+	.then(function(players) {
+		res.send(players);
+	});
+});
+
+app.get('/players/:id', authenticate, restrictAccess, function (req, res) {
+	Player
+	.findOne({
+		where: {id: req.params.id}
+	})
+	.then(function(player) {
+		res.send(player);
+	});
+});
+
+
+//unrestricted for testing purposes only
+app.delete('/players/:id', function (req, res) {
+	Player
+	.findOne(req.params.id)
+	.then(function(player) {
+		player
+		.destroy()
+		.then(function(deletedPlayer) {
+			res.send(deletedPlayer);
+		});
+	});
+});
 
 app.use(express.static('./public'));
 

@@ -10586,7 +10586,7 @@ var data =
 var seedDatabase = function() {
 	for (var i = 0; i < data.profile.length; i++ ) {
 		for (var j=0; j < data.profile[i].team.roster.player.length; j++) {
-			var faId = parseInt(data.profile[i].team.roster.player[j].id);
+			var faId = data.profile[i].team.roster.player[j].id;
 			var firstName = data.profile[i].team.roster.player[j].first_name;
 			var lastName = data.profile[i].team.roster.player[j].last_name;
 			var country = data.profile[i].team.roster.player[j].country;
@@ -10600,7 +10600,7 @@ var seedDatabase = function() {
 			var fullLastName = data.profile[i].team.roster.player[j].full_last_name;
 
 			Player.create({
-				// fa_id: faId,
+				fa_id: faId,
 				first_name: firstName,
 				last_name: lastName,
 				country: country,

@@ -15,8 +15,9 @@ module.exports = function(sequelize, DataTypes) {
      
     classMethods: {
       associate: function(models) {
-        owners.hasMany(models.teams, { foreignKey: 'owner_id' });
-        owners.hasMany(models.leagues, { foreignKey: 'owner_id' });      }
+      //   owners.hasMany(models.teams, { foreignKey: 'owner_id' });
+      //   owners.hasMany(models.leagues, { foreignKey: 'owner_id' });      
+      // }
     }
   });
   return owners;

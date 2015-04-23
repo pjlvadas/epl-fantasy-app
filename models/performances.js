@@ -11,9 +11,9 @@ module.exports = function(sequelize, DataTypes) {
      
     classMethods: {
       associate: function(models) {
-        performances.belongsTo(models.players, { foreignKey: 'player_id' });
-        performances.belongsTo(models.weeks, { foreignKey: 'week_id' });        
-      }
+      //   performances.belongsTo(models.players, { foreignKey: 'player_id' });
+      //   performances.belongsTo(models.weeks, { foreignKey: 'week_id' });        
+      // }
     }
   });
   return performances;

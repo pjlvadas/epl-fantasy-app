@@ -5,6 +5,7 @@ App.Views.Admin = Backbone.View.extend({
 	initialize: function() {
 		console.log('new ADMIN VIEW created');
 		this.adminTemplate = Handlebars.compile($('#template-admin-overview').html());
+		sessionStorage.setItem('currentOwner', this.model.id);
 		this.renderView();
 	},
 

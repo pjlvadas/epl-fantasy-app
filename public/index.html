@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">	
-
+	<script type="text/javascript" src="path/xmlToJSON.js"></script>
 	<script src='bundle.js'></script>
 	<script src='js/app.js'></script>
 
@@ -90,6 +90,43 @@
 <!--     	<button id="button-delete-account">Delete Account</button> -->	
     	<button id="button-log-out">Log Out</button>			
 	</template>
+
+	<template id="template-team-view">
+		<div class="team-view" value="{{id}}">
+		<h2>{{team_name}}</h2>
+		<h3>{{team_motto}}</h3>
+		<ul class="team-players">
+			<li class="team-player-names">{{player_first_name}} {{player_last_name}}</li>
+			<li class="team-player-position">{{position}}</li>
+			<li class="team-player-epl">{{epl_team}}</li>
+			<li class="team-player-country">{{home_counrty}}</li>
+		</ul>
+		</div>
+	</template>
+
+	<template id="template-league-view">
+		<div class="league-view" value="{{id}}">
+			<h2>{{league_name}}</h2>
+			<h3>Current Standings</h3>
+			<ul class="league-standings">
+				<li class="league-team">{{team_name}}</li>
+				<li class="league-team-points"></li>
+			</ul>
+		</div>
+		<div class="league-matchups">
+		</div>
+	</template>
+
+	<template id="template-create-league">
+		<h2>Register Owner</h2>
+		<input type="text" name="league-name" id="new-league-name" placeholder="League Name">
+		<input type="text" name="number-teams" id="number-teams" placeholder="How Many Teams?">
+		<input type="text" name="league-comissioner" id="league-commissioner" placeholder="Leage Commissioner ID">
+		<button id="create-league">Create</button>
+		<button id="go-back">Go Back</button>
+	</template>
+
+
 
 </body>
 </html>

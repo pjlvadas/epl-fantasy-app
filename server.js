@@ -8,6 +8,7 @@ var bcrypt			 = require('bcrypt');
 var request 		 = require('request');
 var path 			 = require('path');
 var models 			 = require(__dirname + '/models');
+var xmltojson		 = require('xmltojson');
 
 var app              = express();
 
@@ -93,18 +94,35 @@ app.get('/owners/:id', authenticate, restrictAccess, function (req, res) {
 
 //unrestricted for testing purposes only
 app.put('/owners/:id', function (req, res) {
-	Owner
-	.findOne({
-		where: { id: req.params.id },
-		include: Team
-	})
-	.then(function(owner) {
-		owner
-		.update(req.body)
-		.then(function(updatedOwner) {
-			res.send(updatedOwner);
+
+	var firstName = req.body.owner_first_name;
+	var lastName  = req.body.owner_last_name;
+	var ownerBio  = req.body.owner_bio;
+	var username  = req.body.username;
+	var password  = req.body.password;
+	var admin 	  = req.body.admin;	
+
+	bcrypt.hash(password, 10, function (err, hash) {
+		Owner
+		.findOne({
+			where: { id: req.params.id },
+			include: Team
+		})
+		.then(function(owner) {
+			owner
+			.update({
+				owner_first_name: firstName,
+				owner_last_name: lastName,
+				owner_bio: ownerBio,
+				username: username,
+				admin: admin,
+				password_digest: hash
+			})
+			.then(function(updatedOwner) {
+				res.send(updatedOwner);
+			});
 		});
-	});
+	});	
 });
 
 //unrestricted for testing purposes only
@@ -513,11 +531,40 @@ app.get('/current_owner', function (req, res) {
 	});
 });
 
+////////////////PLAYER////////////////////
+//unrestricted for testing purposes only
+app.get('/players', function (req, res) {
+	Player
+	.findAll()
+	.then(function(players) {
+		res.send(players);
+	});
+});
+
+app.get('/players/:id', authenticate, restrictAccess, function (req, res) {
+	Player
+	.findOne({
+		where: {id: req.params.id}
+	})
+	.then(function(player) {
+		res.send(player);
+	});
+});
+
+
+//unrestricted for testing purposes only
+app.delete('/players/:id', function (req, res) {
+	Player
+	.findOne(req.params.id)
+	.then(function(player) {
+		player
+		.destroy()
+		.then(function(deletedPlayer) {
+			res.send(deletedPlayer);
+		});
+	});
+});
 
 app.use(express.static('./public'));
-
-// app.listen(3000, function() {
-// 	console.log('Server listening on 30000000000000');
-// });
 
 module.exports = app;

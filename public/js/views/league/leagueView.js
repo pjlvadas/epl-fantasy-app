@@ -12,18 +12,6 @@ App.Views.League = Backbone.View.extend({
 		var renderedTemplate = this.leagueTemplate(this.model.toJSON());
 		this.$el.html(renderedTemplate);
 		$('#sub-container').append(this.$el);
-	},
-
-	events: {
-		'click #go-back': 'goBack',
-		'click #add-team': 'addTeam'		
-	},
-
-	goBack: function() {
-		App.router.navigate('home', {trigger:true});
-	},
-
-	addTeam: function() {
-
 	}
+	
 });

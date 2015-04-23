@@ -1,4 +1,4 @@
-App.Models.Owner = Backbone.Model.extend({
+App.Models.Player = Backbone.Model.extend({
 
 	urlRoot: '/players',
 

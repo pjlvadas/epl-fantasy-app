@@ -10598,7 +10598,6 @@ var seedDatabase = function() {
 			var weightLb = data.profile[i].team.roster.player[j].weight_lb;
 			var fullFirstName = data.profile[i].team.roster.player[j].full_first_name;
 			var fullLastName = data.profile[i].team.roster.player[j].full_last_name;
-			var eplTeam = data.profile[i].team;
 
 			Player.create({
 				fa_id: faId,
@@ -10612,8 +10611,7 @@ var seedDatabase = function() {
 				height_in: heightIn,
 				weight_lb: weightLb,
 				full_first_name: fullFirstName,
-				full_last_name: fullLastName,
-				epl_team: eplTeam
+				full_last_name: fullLastName
 			})
 		}
 	}

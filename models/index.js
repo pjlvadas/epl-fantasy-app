@@ -11,9 +11,10 @@ if (process.env.HEROKU_POSTGRESQL_GREEN_URL) {
       dialect:  'postgres',
       protocol: 'postgres',
       logging:  true
-    })
+    });
   } else {
     var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  };
 var db        = {};
 
 fs

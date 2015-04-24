@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING(20),
       allowNull: false,
-      unique: {msg: 'Please enter a unique username'}
+      unique: {msg: 'Please enter a unique username'},
       validate: {
         notEmpty: {msg: 'Please enter a username'}
       }
@@ -38,12 +38,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       validate: {
-        isInt: {msg: 'Admin ID must be an integer'}
+        isInt: {msg: 'Admin ID must be an integer'},
         notEmpty: {msg: 'Please enter an Admin ID#'}
       }
+    },
     avatar: {
       type: DataTypes.TEXT,
       allowNull: true
+    }
   }, {
 
     underscored: true,

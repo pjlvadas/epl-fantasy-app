@@ -20,8 +20,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
 
     underscored: true,
-
-    // timestamps: false,
      
     classMethods: {
       associate: function(models) {

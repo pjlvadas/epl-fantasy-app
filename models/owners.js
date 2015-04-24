@@ -1,18 +1,52 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var owners = sequelize.define("owners", {
-    owner_first_name: DataTypes.STRING,
-    owner_last_name: DataTypes.STRING,
-    username: DataTypes.STRING(20),
-    password_digest: DataTypes.STRING,
-    owner_bio: DataTypes.TEXT,
-    admin: DataTypes.BOOLEAN,
-    avatar: DataTypes.TEXT
+    owner_first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {msg: 'Please enter a first name'}
+      }
+    },
+    owner_last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {msg: 'Please enter a last name'}
+      }
+    },
+    username: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      unique: {msg: 'Please enter a unique username'}
+      validate: {
+        notEmpty: {msg: 'Please enter a username'}
+      }
+    },
+    password_digest: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {msg: 'Please enter a password'}
+      }
+    },
+    owner_bio: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        isInt: {msg: 'Admin ID must be an integer'}
+        notEmpty: {msg: 'Please enter an Admin ID#'}
+      }
+    avatar: {
+      type: DataTypes.TEXT,
+      allowNull: true
   }, {
 
     underscored: true,
-
-    // timestamps: false,
      
     classMethods: {
       associate: function(models) {

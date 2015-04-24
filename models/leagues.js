@@ -7,19 +7,21 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: {msg: 'Please name your league.'}
       }
-
+    },
     admin_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
         isInt: {msg: 'Please enter an integer'},
       }
+    },
     number_players: {
       type: DataTypes.INTEGER,
       validate: {
         isInt: {msg: 'Please enter an integer'},
         max: {args: [10], msg: '10 Teams is the maximum for a league.'}
       }
+    }
   }, {
 
     underscored: true,
